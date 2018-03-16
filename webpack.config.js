@@ -2,14 +2,15 @@ const path = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require("clean-webpack-plugin")
 
 
-const ROOT_PATH = path.resolve(__dirname);
-const APP_PATH = path.resolve(ROOT_PATH, 'app'); 
-const SRC_PATH = path.resolve(APP_PATH, 'src'); 
-const ENTRY_PATH = path.resolve(SRC_PATH, 'index.js'); 
-const CSS_PATH = path.resolve(SRC_PATH, 'resource/index.less');
-const BUILD_PATH = path.resolve(APP_PATH, 'build/static'); 
+const ROOT_PATH = path.resolve(__dirname)
+const APP_PATH = path.resolve(ROOT_PATH, 'app')
+const SRC_PATH = path.resolve(APP_PATH, 'src')
+const ENTRY_PATH = path.resolve(SRC_PATH, 'index.js')
+const CSS_PATH = path.resolve(SRC_PATH, 'resource/index.less')
+const BUILD_PATH = path.resolve(APP_PATH, 'build/static')
 
 module.exports = {
     entry: {
@@ -70,6 +71,11 @@ module.exports = {
           template: path.resolve(SRC_PATH, 'templates/index.tmpl.html')
         }),
         // new ExtractTextPlugin(path.resolve(BUILD_PATH, 'styles.css'))
-        new ExtractTextPlugin('styles.css')
+        new ExtractTextPlugin('styles.css'),
+        new CleanWebpackPlugin(path.resolve(BUILD_PATH, '.*'), {
+            root: __dirname,
+            verbose: true,
+            dry: false
+        })
     ]
 }
