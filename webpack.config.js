@@ -5,19 +5,20 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 
 const ROOT_PATH = path.resolve(__dirname);
-const APP_PATH = path.resolve(ROOT_PATH, 'app'); //__dirname 中的src目录，以此类推
-const SRC_PATH = path.resolve(APP_PATH, 'src'); //__dirname 中的src目录，以此类推
-const ENTRY_PATH = path.resolve(SRC_PATH, 'index.js'); //根目录文件app.jsx地址
-const BUILD_PATH = path.resolve(APP_PATH, 'build/static'); //发布文件所存放的目录
+const APP_PATH = path.resolve(ROOT_PATH, 'app'); 
+const SRC_PATH = path.resolve(APP_PATH, 'src'); 
+const ENTRY_PATH = path.resolve(SRC_PATH, 'index.js'); 
+const CSS_PATH = path.resolve(SRC_PATH, 'resource/index.less');
+const BUILD_PATH = path.resolve(APP_PATH, 'build/static'); 
 
 module.exports = {
     entry: {
-        app: ENTRY_PATH
+        app: [ENTRY_PATH, CSS_PATH]
     },
     output: {
         publicPath: '', //编译好的文件，在服务器的路径,这是静态资源引用路径
-        path: BUILD_PATH, //编译到当前目录
-        filename: 'bundle-[hash:5].js', //编译后的文件名字
+        path: BUILD_PATH, 
+        filename: 'bundle-[hash:5].js', 
         chunkFilename: '[name].[chunkhash:5].min.js'
     },
     devServer: {
@@ -29,7 +30,7 @@ module.exports = {
     
     devtool: 'cheap-module-eval-source-map',
     resolve: {
-        extensions: ['.js', '.jsx', '.less', '.scss', '.css', '.html'] 
+        extensions: ['.js', '.jsx', '.less', '.css', '.html'] 
     },
     module: {
         loaders: [{
@@ -39,19 +40,12 @@ module.exports = {
             include: [APP_PATH]
         }, {
             test: /\.css$/,
-            exclude: /^node_modules$/,
-            loader: ExtractTextPlugin.extract('style', ['css', 'autoprefixer']),
-            include: [APP_PATH]
+            loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: 'css-loader'}),
+            // loader: ['style-loader', 'css-loader' ]
         }, {
             test: /\.less$/,
-            exclude: /^node_modules$/,
-            loader: ExtractTextPlugin.extract('style', ['css', 'autoprefixer', 'less']),
-            include: [APP_PATH]
-        }, {
-            test: /\.scss$/,
-            exclude: /^node_modules$/,
-            loader: ExtractTextPlugin.extract('style', ['css', 'autoprefixer', 'sass']),
-            include: [APP_PATH]
+            loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader', 'less-loader']}),
+            // loader: ['style-loader', 'css-loader', 'less-loader' ]
         }, {
             test: /\.(eot|woff|svg|ttf|woff2|gif|appcache)(\?|$)/,
             exclude: /^node_modules$/,
@@ -75,6 +69,7 @@ module.exports = {
         new HtmlWebpackPlugin({
           template: path.resolve(SRC_PATH, 'templates/index.tmpl.html')
         }),
-        new ExtractTextPlugin('[name].css')
+        // new ExtractTextPlugin(path.resolve(BUILD_PATH, 'styles.css'))
+        new ExtractTextPlugin('styles.css')
     ]
 }
