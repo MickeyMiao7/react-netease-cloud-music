@@ -44,6 +44,7 @@
     "less-loader": "^4.1.0",
     "react-transform-hmr": "^1.0.4",
     "style-loader": "^0.20.3",
+    "url-loader": "^1.0.1",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.2"
   }

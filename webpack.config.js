@@ -9,7 +9,7 @@ const ROOT_PATH = path.resolve(__dirname)
 const APP_PATH = path.resolve(ROOT_PATH, 'app')
 const SRC_PATH = path.resolve(APP_PATH, 'src')
 const ENTRY_PATH = path.resolve(SRC_PATH, 'index.js')
-const CSS_PATH = path.resolve(SRC_PATH, 'resource/index.less')
+const CSS_PATH = path.resolve(SRC_PATH, 'resources/index.less')
 const BUILD_PATH = path.resolve(APP_PATH, 'build/static')
 
 module.exports = {
@@ -56,7 +56,6 @@ module.exports = {
             test: /\.(png|jpg)$/,
             exclude: /^node_modules$/,
             loader: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]',
-            //注意后面那个limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
             include: [APP_PATH]
         }, {
             test: /\.jsx$/,
@@ -70,9 +69,8 @@ module.exports = {
         new HtmlWebpackPlugin({
           template: path.resolve(SRC_PATH, 'templates/index.tmpl.html')
         }),
-        // new ExtractTextPlugin(path.resolve(BUILD_PATH, 'styles.css'))
         new ExtractTextPlugin('styles.css'),
-        new CleanWebpackPlugin(path.resolve(BUILD_PATH, '.*'), {
+        new CleanWebpackPlugin(path.resolve(BUILD_PATH, '*.*'), {
             root: __dirname,
             verbose: true,
             dry: false
