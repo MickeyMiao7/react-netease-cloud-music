@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import SearchBar from '../components/SearchBar'
 
 class App extends Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class App extends Component {
           <div className="logo">
           </div>
           <h1>Netease Music</h1>
-          <div className="search"></div>
+          <SearchBar/>
+
           <div className="tool-bar"></div>
         </header>
         <main>
