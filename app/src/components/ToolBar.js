@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 
-class SearchBar extends Component {
+class ToolBar extends Component {
   constructor(props) {
     super(props)
   }
   render() {
     return (
-      <div className="search-bar">
-        
+      <div className="tool-bar">
+
       </div>
     )
   }
 }
 
-export default SearchBar
+export default ToolBar
