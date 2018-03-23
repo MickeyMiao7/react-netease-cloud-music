@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import SearchBar from '../components/SearchBar'
-import ToolBar from '../components/SearchBar'
+import ToolBar from '../components/Toolbar'
 
 class App extends Component {
   constructor(props) {
