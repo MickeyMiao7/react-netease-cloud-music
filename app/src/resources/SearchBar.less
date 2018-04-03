@@ -1,3 +1,26 @@
 .search-bar {
   margin-left: 30px;
+
+  display: flex;
+  align-items: center;
+
+  input[name="searchtext"] {
+    padding: 0 14px;
+    position: relative;
+    display: block;
+    width: @searchbar-width;
+    height: @searchbar-height;
+    color: #fff;
+    border: 1px solid @theme-separator-color;
+    border-radius: 12px;
+  }
+
+  span.icon-search {
+    position: absolute;
+    left: 14px;
+  }
+
+  input[name="searchtext"]::placeholder {
+    color: @theme-placeholder-color;
+  }
 }

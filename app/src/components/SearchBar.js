@@ -9,6 +9,7 @@ class SearchBar extends Component {
       <div className="search-bar">
         <form action="">
           <input type="text" name="searchtext" placeholder="search" />
+          <span className="iconfont icon-search"></span>
         </form>
       </div>
     )
