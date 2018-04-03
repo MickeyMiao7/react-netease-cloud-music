@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import History from '../components/History'
 import SearchBar from '../components/SearchBar'
 import ToolBar from '../components/Toolbar'
 import Player from '../components/Player'
@@ -15,10 +16,9 @@ class App extends Component {
           <div className="logo">
           </div>
           <h1>Netease Music</h1>
+          <History/>
           <SearchBar/>
           <ToolBar/>
-
-          <div className="tool-bar"></div>
         </header>
         <main>
           <aside></aside>
