@@ -4,7 +4,7 @@
   box-sizing: border-box;
 
   color: @theme-text-color;
-  background-color: #fff;
+  background-color: @theme-bg-color;
 
   > header {
     height: @header-height;
@@ -13,7 +13,7 @@
     align-items: center;
 
     color: #fff;
-    background-color: @theme-bg-color;
+    background-color: @theme-color;
 
     > .logo {
       width: 27px;
@@ -30,19 +30,16 @@
   > main {
     display: flex;
     flex: 1 1 auto;
-
-    > aside {
-      width: @side-bar-width;
-    }
-
-
   }
 
-
+  > aside {
+    width: @side-bar-width;
+  }
 
   > footer {
     height: @footer-height;
-
+    display: flex;
+    align-items: center;
   }
   
 }

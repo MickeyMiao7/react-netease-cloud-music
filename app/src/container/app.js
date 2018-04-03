@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import SearchBar from '../components/SearchBar'
 import ToolBar from '../components/Toolbar'
+import Player from '../components/Player'
 
 class App extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class App extends Component {
           <section></section>
         </main>
         <footer>
-          {/* <Player /> */}
+          <Player />
         </footer>
       </div>
     )
