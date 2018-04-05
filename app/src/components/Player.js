@@ -13,7 +13,9 @@ class Player extends Component {
           <span className="iconfont icon-skipnext"></span>
         </div>
 
-        <div className="time-bar"></div>
+        <div className="time-bar">
+
+        </div>
         <div className="volume"></div>
       </div>
     )
