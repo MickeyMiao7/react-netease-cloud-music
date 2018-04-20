@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import Slider from 'rc-slider'
+import 'rc-slider/assets/index.css';
 
 class Player extends Component {
   constructor(props) {
@@ -14,7 +16,10 @@ class Player extends Component {
         </div>
 
         <div className="time-bar">
-
+          <span className="current-time">00:00</span>
+          
+          <Slider />
+          <span className="duration">00:00</span>
         </div>
         <div className="volume"></div>
       </div>

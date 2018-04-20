@@ -1,4 +1,7 @@
 .player {
+  display: flex;
+  align-items: center;
+
   > .player-control {
     display: flex;
     align-items: center;
@@ -23,6 +26,18 @@
 
       line-height: 32px;
       font-size: 14px;
+    }
+  }
+
+  > .time-bar {
+    margin: 0 30px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    
+    .rc-slider-handle {
+      cursor: pointer;
+      border: @theme-separator-color;
     }
   }
 }
