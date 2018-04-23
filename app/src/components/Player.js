@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css';
 
+Slider.defaultValue = 0
+// Slider.marks = { 0: '00:00',
+                //  1: ''
+              //  }
 class Player extends Component {
   constructor(props) {
     super(props)

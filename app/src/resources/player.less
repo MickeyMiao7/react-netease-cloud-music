@@ -35,9 +35,34 @@
     display: flex;
     align-items: center;
     
-    .rc-slider-handle {
-      cursor: pointer;
-      border: @theme-separator-color;
+    .rc-slider {
+      margin: 0 10px;
+      
+      .rc-slider-handle {
+        position: relative;
+
+        cursor: pointer;
+        border: 0.5px solid @theme-separator-color;
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%)
+
+        display: block;
+
+        width: 6px;
+        height: 6px;
+        background-color: red;
+        border-radius: 50%;
+      }
     }
+
+
+
+
   }
 }
