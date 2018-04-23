@@ -1,11 +1,27 @@
 import React, { Component } from 'react'
 import Slider from 'rc-slider'
-import 'rc-slider/assets/index.css';
+import Tooltip from 'rc-tooltip'
+import 'rc-slider/assets/index.css'
+import 'rc-tooltip/assets/bootstrap.css'
 
-Slider.defaultValue = 0
-// Slider.marks = { 0: '00:00',
-                //  1: ''
-              //  }
+const createSliderWithTooltip = Slider.createSliderWithTooltip
+const Handle = Slider.Handle
+
+const handle = (props) => {
+  const { value, dragging, index, ...restProps } = props
+  return (
+    <Tooltip
+      prefixCls="rc-slider-tooltip"
+      overlay={value}
+      visible={dragging}
+      placement="top"
+      key={index}
+    >
+      <Handle value={value} {...restProps} />
+    </Tooltip>
+  )
+}
+
 class Player extends Component {
   constructor(props) {
     super(props)
@@ -22,10 +38,14 @@ class Player extends Component {
         <div className="time-bar">
           <span className="current-time">00:00</span>
           
-          <Slider />
+          <Slider class="time" defaultValue={0} handle={handle} />
           <span className="duration">00:00</span>
         </div>
-        <div className="volume"></div>
+
+        <div className="volume">
+          <span className="iconfont icon-volumemedium"></span>
+          <Slider class="vol" defaultValue={0} handle={handle} />
+        </div>
       </div>
     )
   }

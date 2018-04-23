@@ -25,6 +25,7 @@
   "homepage": "https://github.com/MickeyMiao7/netease-music#readme",
   "dependencies": {
     "rc-slider": "^8.6.1",
+    "rc-tooltip": "^3.7.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
@@ -33,6 +34,8 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
+    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^0.1.19",
