@@ -3,6 +3,8 @@ import History from '../components/History'
 import SearchBar from '../components/SearchBar'
 import ToolBar from '../components/Toolbar'
 import Player from '../components/Player'
+import Playlist from '../components/Playlist'
+import PlaylistDetail from '../components/PlaylistDetail'
 
 class App extends Component {
   constructor(props) {

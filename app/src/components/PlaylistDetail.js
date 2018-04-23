@@ -1,18 +1,16 @@
 import React, { Component } from 'react'
 
-class Playlist extends Component {
+class PlaylistDetail extends Component {
   constructor (props) {
     super(props);
     // this.handleClick = this.handleClick.bind(this);
-}
 
+  }
   render() {
-    return(
-      <ul className="playlist">
-      </ul>
+    return (
+      <div></div>
     )
   }
-
 }
 
-export default Playlist
+export default PlaylistDetail
