@@ -9,6 +9,8 @@ class Playlist extends Component {
   render() {
     return(
       <ul className="playlist">
+        <li>Test</li>
+        <li>Test</li>
       </ul>
     )
   }

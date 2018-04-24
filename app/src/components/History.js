@@ -8,6 +8,7 @@ class History extends Component {
     return (
       <div className="history">
         <span className="iconfont icon-previous"></span>
+        <span className="separator"> </span>
         <span className="iconfont icon-next"></span>
       </div>
     )
