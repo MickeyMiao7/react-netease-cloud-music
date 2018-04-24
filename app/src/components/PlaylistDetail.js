@@ -8,7 +8,9 @@ class PlaylistDetail extends Component {
   }
   render() {
     return (
-      <div></div>
+      <div className="playlist-detail">
+
+      </div>
     )
   }
 }
