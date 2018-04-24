@@ -23,7 +23,9 @@ class App extends Component {
           <ToolBar/>
         </header>
         <main>
-          <aside></aside>
+          <aside>
+            <Playlist />
+          </aside>
           <section></section>
         </main>
         <footer>

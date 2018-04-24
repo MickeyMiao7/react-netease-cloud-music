@@ -31,11 +31,15 @@
   > main {
     display: flex;
     flex: 1 1 auto;
+
+    > aside {
+      width: @side-bar-width;
+      background-color: @theme-aside-bg-color;
+      border-right: 1px solid @theme-separator-color;
+    }
+
   }
 
-  > aside {
-    width: @side-bar-width;
-  }
 
   > footer {
     height: @footer-height;
@@ -44,6 +48,7 @@
     align-items: center;
 
     border-top: 1px solid @theme-separator-color;
+    background-color: @theme-footer-bg-color;
   }
   
 }
