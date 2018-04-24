@@ -26,7 +26,9 @@ class App extends Component {
           <aside>
             <Playlist />
           </aside>
-          <section></section>
+          <section>
+            <PlaylistDetail />
+          </section>
         </main>
         <footer>
           <Player />
