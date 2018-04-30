@@ -37,7 +37,7 @@ class PlaylistDetail extends Component {
         </div>
         <div className="table">
           <nav>
-            <a href="">Song Info</a>
+            <a href=""> Info</a>
           </nav>
         </div>
 
