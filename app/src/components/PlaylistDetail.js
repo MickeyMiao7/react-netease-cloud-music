@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 class PlaylistDetail extends Component {
   constructor (props) {
-    super(props);
+    super(props)
     // this.handleClick = this.handleClick.bind(this);
 
   }
@@ -13,22 +13,25 @@ class PlaylistDetail extends Component {
           <img className="cover" src="" alt=""/>
           <div className="content">
             <section>
-              <span className="label-playlist">Playlist</span>
-              <span className="title">English</span>
-              <span className="icon"></span>
-              <span className=""></span>
-              <span className="icon"></span>
+              <div className="title">
+                <span className="label-playlist">歌单</span>
+                <span className="playlist-title">我喜欢的音乐</span>
+              </div>
+              <div className="count">
+                <div>
+                  <p>歌曲数</p>
+                  <p>0</p>
+                </div>
+                <div>
+                  <p>播放数</p>
+                  <p>0</p>
+                </div>
+              </div>
             </section>
             <section>
               <img className="creator-avatar" src="" alt=""/>
               <span className="creator-nickname">Mickey</span>
-              <span className="create-time">2018-04-24 Created</span>
-            </section>
-            <section>
-              Tag:
-            </section>
-            <section>
-              Description:
+              <span className="create-time">2018-04-24创建</span>
             </section>
          </div>
         </div>

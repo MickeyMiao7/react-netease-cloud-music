@@ -10,6 +10,8 @@
 
   > header {
     box-sizing: border-box;
+    flex-grow: 0;
+    flex-shrink: 0;
     flex-basis: @header-height;
 
     padding: 2px 10px;
@@ -23,6 +25,7 @@
       width: 27px;
       height: 30px;
       background: url('./img/logo.png');
+      background-repeat: no-repeat;
       background-size: 100%;
     }
 
@@ -32,14 +35,20 @@
   }
 
   > main {
+    box-sizing: border-box;
     flex-grow: 1;
 
     display: flex;
 
     > aside {
       width: @side-bar-width;
+      min-width: 250px;
       background-color: @theme-aside-bg-color;
       border-right: 1px solid @theme-separator-color;
+    }
+
+    .playlist-detail {
+      width: 100% - @side-bar-width;
     }
 
   }
