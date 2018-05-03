@@ -89,7 +89,11 @@
 
       span.creator-nickname {
         margin-left: 6px;
-        color: #444444;
+        color: #888888;
+        &:hover {
+          color: #444444;
+          cursor: pointer;
+        }
       }
 
       span.create-time {
@@ -103,10 +107,12 @@
   }
 
   > .table {
-    nav {
+    nav.track-tab {
       display: flex;
+      padding-left: 20px;
+      border-bottom: 1px solid @theme-color;
       a {
-        padding: 2px;
+        margin: 0 4px;
         width: 120px;
         height: 20px;
 
@@ -115,7 +121,58 @@
         justify-content: center;
 
         color: #fff;
+        cursor: pointer;
         background-color: @theme-color;
+      }
+    }
+
+    table.track-table {
+      table-layout: fixed;
+      border-collapse: collapse;
+
+      width: 100%;
+      over-flow-x: hidden;
+
+      tr {
+        height: 30px;
+      }
+
+      td {
+        padding: 0 8px;
+        white-space: nowrap;
+      }
+
+      tbody {
+        overflow-y: hidden;
+      }
+
+      thead {
+        color: #666666;
+        tr {
+          border-bottom: 1px solid @theme-separator-color;
+
+          td:hover {
+            background-color: #ebeced;
+          }
+
+          td:not(:first-child) {
+            border-left: 1px solid @theme-separator-color;
+          }
+
+          .artists
+          {
+              width: 200px;
+          }
+          .album
+          {
+              width: 320px;
+          }
+          .time
+          {
+              width: 80px;
+          }
+          
+        }
       }
     }
   }

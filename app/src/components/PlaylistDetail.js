@@ -10,7 +10,7 @@ class PlaylistDetail extends Component {
     return (
       <div className="playlist-detail">
         <div className="intro">
-          <img className="cover" src="" alt=""/>
+          <img className="cover" src={require('../resources/img/placeholder-track.png')} alt=""/>
           <div className="content">
             <section>
               <div className="title">
@@ -36,9 +36,30 @@ class PlaylistDetail extends Component {
          </div>
         </div>
         <div className="table">
-          <nav>
-            <a href=""> Info</a>
+          <nav className="track-tab">
+            <a href="">歌曲列表</a>
+            <a href="">评论</a>
+            <a href="">收藏者</a>
           </nav>
+          <table className="track-table">
+            <thead>
+              <tr>
+                <td className="name">音乐标题</td>
+                <td className="artists">歌手</td>
+                <td className="album">专辑</td>
+                <td className="time">时长</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+              </tr>
+            </tbody>
+          </table>
+
         </div>
 
       </div>

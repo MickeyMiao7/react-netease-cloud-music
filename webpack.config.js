@@ -53,9 +53,9 @@ module.exports = {
             loader: 'file-loader?name=[name].[ext]',
             include: [APP_PATH]
         }, {
-            test: /\.(png|jpg)$/,
+            test: /\.(png|jpg|PNG)$/,
             exclude: /^node_modules$/,
-            loader: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]',
+            loader: 'url-loader?limit=8192&name=images/.[name].[ext]',
             include: [APP_PATH]
         }, {
             test: /\.jsx$/,
