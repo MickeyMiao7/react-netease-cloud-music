@@ -17,7 +17,7 @@ class App extends Component {
         <header>
           <div className="logo">
           </div>
-          <h1>网易云音乐</h1>
+          <h1>Netease Music</h1>
           <History/>
           <SearchBar/>
           <ToolBar/>

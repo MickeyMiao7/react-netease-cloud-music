@@ -27,11 +27,14 @@ class Playlist extends Component {
           ids.map((id, index) => {
             let cls = id === selectedId ? 'selected' : ''
             return (
-              <li onClick={()=>{this.handleClick(id)}} key={id} className={cls}>Plasylist {id}
+
+        
+              <li onClick={()=>{this.handleClick(id)}} key={id} className={cls}><span className="iconfont icon-musicmenu"></span>Plasylist {id}
               </li>
             )
           })
         }
+        <li><span className="iconfont icon-like"></span>我喜欢的音乐</li>
       </ul>
     )
   }

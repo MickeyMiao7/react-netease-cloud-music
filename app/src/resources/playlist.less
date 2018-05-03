@@ -3,14 +3,12 @@ ul.playlist {
   padding: 0;
 
    > li {
-    display: block;
     margin: 0;
     padding: 6px 0 6px 10px;
-
     position: relative;
 
-    line-height: 100%;
-
+    display: flex;
+    align-items: center;
     &.selected {
       background-color: @theme-selected-color;
       &::after {
@@ -23,6 +21,10 @@ ul.playlist {
         height: 100%;
         border-left: 4px solid @theme-color;
       }
+    }
+
+    span {
+      margin: 0 6px;
     }
     
   }
