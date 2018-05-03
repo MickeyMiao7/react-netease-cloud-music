@@ -26,15 +26,26 @@ module.exports = {
         contentBase: BUILD_PATH, 
         historyApiFallback: true, // 不跳转
         inline: true,
-        hot: true
-      },
+        hot: true,
+        proxy: {
+            "/api/**": {
+                "target": "http://music.163.com",
+                ignorePath: false,
+                changeOrigin: true,
+                secure: false,
+                headers: {
+                    "Referer": "http://music.163.com"
+                }
+            }
+        }
+    },
     
     devtool: 'cheap-module-eval-source-map',
     resolve: {
         extensions: ['.js', '.jsx', '.less', '.css', '.html'] 
     },
     module: {
-        loaders: [{
+        rules: [{
             test: /\.js$/,
             exclude: /^node_modules$/,
             loader: 'babel-loader',
