@@ -1,31 +1,47 @@
-ul.playlist {
+ul.side-bar {
   margin: 0;
   padding: 0;
 
-   > li {
+  li {
     margin: 0;
-    padding: 6px 0 6px 10px;
-    position: relative;
+    padding: 0;
 
-    display: flex;
-    align-items: center;
-    &.selected {
-      background-color: @theme-selected-color;
-      &::after {
-        content: "";
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 1px;
-        height: 100%;
-        border-left: 4px solid @theme-color;
+    p.side-bar-header {
+      margin: 0;
+      padding: 6px 10px;
+      color: #7d7d7d;
+    }
+
+    ul.playlist {
+      margin: 0;
+      padding: 0;
+      
+      > li {
+        margin: 0;
+        padding: 4px 12px;
+        position: relative;
+      
+        display: flex;
+        align-items: center;
+        &.selected {
+          background-color: @theme-selected-color;
+          &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1px;
+            height: 100%;
+            border-left: 4px solid @theme-color;
+          }
+        }
+      
+        span {
+          margin: 0 6px;
+        }
+
       }
     }
-
-    span {
-      margin: 0 6px;
-    }
-    
   }
 }

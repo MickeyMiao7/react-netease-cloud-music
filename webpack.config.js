@@ -36,6 +36,15 @@ module.exports = {
                 headers: {
                     "Referer": "http://music.163.com"
                 }
+            },
+            "/weapi/**": {
+                "target": "http://music.163.com",
+                ignorePath: false,
+                changeOrigin: true,
+                secure: false,
+                headers: {
+                    "Referer": "http://music.163.com"
+                }
             }
         }
     },

@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import Slider from 'rc-slider'
 import Tooltip from 'rc-tooltip'
-import axios from 'axios'
 import 'rc-slider/assets/index.css'
 import 'rc-tooltip/assets/bootstrap.css'
 
+import ClientService from '../service/ClientService'
+
+const clientService = new ClientService()
 const createSliderWithTooltip = Slider.createSliderWithTooltip
 const Handle = Slider.Handle
 
@@ -28,11 +30,6 @@ class Player extends Component {
     super(props)
   }
   render() {
-   //  axios.get('/api/song/lyric?id=29775505').then(function (response) {
-   //    console.log(response)
-   //  }.catch(function (error) {
-   //    console.log(error)
-   //  }))
     return (
       <div className="player">
         <div className="player-control">
