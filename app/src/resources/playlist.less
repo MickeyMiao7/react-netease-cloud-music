@@ -21,9 +21,16 @@ ul.side-bar {
         padding: 4px 12px;
         position: relative;
       
+        color: #5c5c5c;
         display: flex;
         align-items: center;
+        
+        &:hover {
+          color: #000000;
+        }
+        
         &.selected {
+          color: #000000;
           background-color: @theme-selected-color;
           &::after {
             content: "";

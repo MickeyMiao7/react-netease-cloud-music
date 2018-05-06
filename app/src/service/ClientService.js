@@ -17,6 +17,7 @@ class ClientService {
     })
     .then((response) => {
       console.log(response.data.playlist)
+      return response.data.playlist
     })
     .catch((error) => {
       console.log(error)

@@ -3,10 +3,19 @@ import React, { Component } from 'react'
 class PlaylistDetail extends Component {
   constructor (props) {
     super(props)
+    this.props.playlist = {
+    }
     // this.handleClick = this.handleClick.bind(this);
-
   }
+
+  // static defaultProps = {
+    // playlist: {
+// 
+    // }
+  // }
+
   render() {
+    console.log(this.props.playlist)
     return (
       <div className="playlist-detail">
         <div className="intro">

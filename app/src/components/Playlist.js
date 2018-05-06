@@ -11,15 +11,18 @@ class Playlist extends Component {
 
 
   handleClick(id) {
-    console.log(id)
-    this.setState({
-      selectedId: id,
-    })
+    if (id !== this.state.selectedId) {
+      this.setState({
+        selectedId: id,
+      })
+      this.props.onPlaylistClick(id);
+    }
+
   }
 
 
   render() {
-    const ids = [1, 2, 3]
+    const userPlaylist = this.props.userPlaylist
     const selectedId = this.state.selectedId
     return(
       <ul className="side-bar">
@@ -28,12 +31,13 @@ class Playlist extends Component {
         <li><p className="side-bar-header">创建的歌单</p>
           <ul className="playlist">
             {
-              ids.map((id, index) => {
-                let cls = id === selectedId ? 'selected' : ''
-                return (
-                  <li onClick={() => { this.handleClick(id) }} key={id} className={cls}><span className="iconfont icon-musicmenu"></span>Plasylist {id}
-                  </li>
-                )
+              userPlaylist.map((playlist, index) => {
+                 let { name, id, ...others } = playlist
+                 let cls = id === selectedId ? 'selected' : ''
+                 return (
+                   <li onClick={() => {this.handleClick(id)}} key={id} className={cls}><span className="iconfont icon-musicmenu"></span>{name}
+                   </li>
+                 )
               })
             }
             <li><span className="iconfont icon-like"></span>我喜欢的音乐</li>

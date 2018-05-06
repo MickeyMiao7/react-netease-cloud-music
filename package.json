@@ -48,6 +48,8 @@
     "less": "^3.0.0",
     "less-loader": "^4.1.0",
     "react-hot-loader": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
     "style-loader": "^0.20.3",
     "url-loader": "^1.0.1",
     "webpack": "^4.6.0",

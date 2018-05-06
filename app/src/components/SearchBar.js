@@ -7,7 +7,7 @@ class SearchBar extends Component {
   render() {
     return (
       <div className="search-bar">
-        <input type="text" name="searchtext" placeholder="search" />
+        <input type="text" name="searchtext" placeholder="搜索" />
         <span className="iconfont icon-search"></span>
       </div>
     )
