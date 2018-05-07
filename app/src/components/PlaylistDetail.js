@@ -8,14 +8,9 @@ class PlaylistDetail extends Component {
     // this.handleClick = this.handleClick.bind(this);
   }
 
-  // static defaultProps = {
-    // playlist: {
-// 
-    // }
-  // }
-
   render() {
-    console.log(this.props.playlist)
+    const playlist = this.props.playlist
+    
     return (
       <div className="playlist-detail">
         <div className="intro">
