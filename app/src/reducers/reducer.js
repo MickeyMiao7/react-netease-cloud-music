@@ -1,6 +1,17 @@
 import { combineReducers } from 'redux'
 import ActionTypes from '../actions/ActionTypes'
 
+const defaultStates = {
+  playlist: {
+    creator: {
+      nickname: 'Mickey'
+    },
+    createTime: '',
+    playCount: 0,
+    trackCount: 0,
+  }
+}
+
 function login(state=0, action) {
   switch (action.type) {
     case ActionTypes.USER_LOGIN:
@@ -20,7 +31,7 @@ function userPlayList(state=[], action) {
   }
 }
 
-function selectedPlaylist(state=null, action) {
+function selectedPlaylist(state=defaultStates.playlist, action) {
   switch (action.type) {
     case ActionTypes.RECEIVE_PLAYLIST_DETAIL_SUCCESS:
       return action.data

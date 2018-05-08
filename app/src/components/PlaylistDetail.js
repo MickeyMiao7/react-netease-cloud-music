@@ -3,13 +3,16 @@ import React, { Component } from 'react'
 class PlaylistDetail extends Component {
   constructor (props) {
     super(props)
-    this.props.playlist = {
-    }
-    // this.handleClick = this.handleClick.bind(this);
   }
 
+//   static defaultProps = {
+//     playlist: {
+//       name: 1
+//     }
+//   }
   render() {
     const playlist = this.props.playlist
+    console.log(playlist)
     
     return (
       <div className="playlist-detail">
@@ -24,17 +27,17 @@ class PlaylistDetail extends Component {
               <div className="count">
                 <div>
                   <p>歌曲数</p>
-                  <p>0</p>
+                  <p>{playlist.trackCount}</p>
                 </div>
                 <div>
                   <p>播放数</p>
-                  <p>0</p>
+                  <p>{playlist.playCount}</p>
                 </div>
               </div>
             </section>
             <section>
               <img className="creator-avatar" src="" alt=""/>
-              <span className="creator-nickname">Mickey</span>
+              <span className="creator-nickname">{playlist.creator.nickname}</span>
               <span className="create-time">2018-04-24创建</span>
             </section>
          </div>

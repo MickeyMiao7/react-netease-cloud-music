@@ -66,7 +66,7 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('connect state', state)
+  // console.log('connect state', state)
 
   return {
     userId: state.userId,
