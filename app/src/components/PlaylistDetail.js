@@ -38,7 +38,7 @@ class PlaylistDetail extends Component {
             <section>
               <img className="creator-avatar" src="" alt=""/>
               <span className="creator-nickname">{playlist.creator.nickname}</span>
-              <span className="create-time">2018-04-24创建</span>
+              <span className="create-time">{playlist.createTime}</span>
             </section>
          </div>
         </div>
