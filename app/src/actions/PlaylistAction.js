@@ -13,6 +13,12 @@ export function loadSelectedPlaylist(id) {
   }
 }
 
+export function loadTrack() {
+  return dispatch => {
+
+  }
+}
+
 function requestUserPlaylist(userId, dispatch) {
   dispatch({type: 'REQUEST_USER_PLAYLIST', userId})
   axios.get('/api/user/playlist/', {
