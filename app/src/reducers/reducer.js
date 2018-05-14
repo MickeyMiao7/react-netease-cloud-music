@@ -4,11 +4,14 @@ import ActionTypes from '../actions/ActionTypes'
 const defaultStates = {
   playlist: {
     creator: {
-      nickname: 'Mickey'
+      nickname: 'Mickey',
+      avatarUrl: ''
     },
     createTime: '',
     playCount: 0,
     trackCount: 0,
+    coverImgUrl: '',
+    tracks: []
   }
 }
 
