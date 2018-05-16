@@ -4,6 +4,7 @@ import { convertDate, msToTime, formatNumber } from '../utils/util'
 class PlaylistDetail extends Component {
   constructor (props) {
     super(props)
+    this.handleClick = handleClick.bind(this)
   }
 
 //   static defaultProps = {
@@ -11,6 +12,9 @@ class PlaylistDetail extends Component {
 //       name: 1
 //     }
 //   }
+  handleClick() {
+
+  }
   render() {
     const playlist = this.props.playlist
     const createTime = convertDate(playlist.createTime)
@@ -68,7 +72,7 @@ class PlaylistDetail extends Component {
                   const artist = track.artists.length ? track.artists[0] : {name: ''}
                   const album = track.album || {name: ''}
                   return (
-                    <tr key={index}>
+                    <tr key={index} onClick={}>
                       <td>{formatNumber(index + 1)}</td>
                       <td>{trackName}</td>
                       <td>{artist.name}</td>
