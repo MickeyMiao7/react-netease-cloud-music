@@ -13,10 +13,22 @@ export function loadSelectedPlaylist(id) {
   }
 }
 
-export function loadTrack() {
+export function loadTrack(trackId) {
   return dispatch => {
-
+    requestTrack(trackId, dispatch)
   }
+}
+
+function requestTrack(trackId, dispatch) {
+  dispatch({type: 'REQUEST_TRACK', trackId})
+  console.log(trackId)
+  axios.get(`/api/music/url?id=${trackId}`, {
+  })
+  .then(response => {
+    console.log(response)
+    dispatch({type: ActionTypes.RECEIVE_TRACK_SUCCESS, data: trackId})
+
+  })
 }
 
 function requestUserPlaylist(userId, dispatch) {
@@ -28,7 +40,7 @@ function requestUserPlaylist(userId, dispatch) {
       uid: userId
     }
   })
-  .then((response) => {
+  .then(response => {
     dispatch({type: ActionTypes.RECEIVE_USER_PLAYLIST_SUCCESS, data: response.data.playlist})
   })
   .catch((error) => {

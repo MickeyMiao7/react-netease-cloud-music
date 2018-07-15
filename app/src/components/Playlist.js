@@ -5,7 +5,7 @@ class Playlist extends Component {
     super(props)
     this.handleClick = this.handleClick.bind(this)
     this.state = {
-      selectedId: null
+      selectedId: 0
     }
   }
 
@@ -47,7 +47,7 @@ class Playlist extends Component {
       </ul>
     )
   }
-
 }
+
 
 export default Playlist

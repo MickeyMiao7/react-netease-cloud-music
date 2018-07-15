@@ -4,6 +4,8 @@ import Tooltip from 'rc-tooltip'
 import 'rc-slider/assets/index.css'
 import 'rc-tooltip/assets/bootstrap.css'
 
+import { connect } from 'react-redux'
+
 import ClientService from '../service/ClientService'
 
 const clientService = new ClientService()
@@ -25,11 +27,15 @@ const handle = (props) => {
   )
 }
 
+
 class Player extends Component {
   constructor(props) {
     super(props)
   }
   render() {
+    const src = `http://music.163.com/song/media/outer/url?id=${this.props.selectedTrack}.mp3`
+    console.log(`In Player, ID=${src}`)
+    
     return (
       <div className="player">
         <div className="player-control">
@@ -49,9 +55,20 @@ class Player extends Component {
           <span className="iconfont icon-volumemedium"></span>
           <Slider class="vol" defaultValue={0} handle={handle} />
         </div>
+        <audio
+          src={src}
+          autoPlay>
+        </audio>
+
       </div>
     )
   }
 }
 
-export default Player
+function mapStateToProps(state, ownProps) {
+  return {
+    selectedTrack: state.selectedTrack
+  }
+}
+
+export default connect(mapStateToProps)(Player)

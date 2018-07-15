@@ -12,7 +12,8 @@ const defaultStates = {
     trackCount: 0,
     coverImgUrl: '',
     tracks: []
-  }
+  },
+  selectedTrack: 0
 }
 
 function login(state=0, action) {
@@ -44,6 +45,15 @@ function selectedPlaylist(state=defaultStates.playlist, action) {
 
 }
 
+function selectedTrack(state=defaultStates.selectedTrack, action) {
+  switch (action.type) {
+    case ActionTypes.RECEIVE_TRACK_SUCCESS:
+      return action.data
+    default:
+      return state
+  }
+}
+
 function error(state='', action) {
   switch (action.type) {
     case ActionTypes.RECEIVE_AJAX_CALL_FAILURE:
@@ -59,6 +69,7 @@ const reducer = combineReducers({
   userId: login,
   userPlaylist: userPlayList,
   selectedPlaylist: selectedPlaylist,
+  selectedTrack: selectedTrack,
   error: error
 })
 

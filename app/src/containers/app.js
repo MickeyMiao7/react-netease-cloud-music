@@ -19,7 +19,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const userId = 1404833398
+    // const userId = 1404833398
+    let userId = 47458264
+    // let userId = 78843035
     const dispatch = this.props.dispatch
     dispatch(login(userId))
     dispatch(loadUserPlaylist(userId))
@@ -34,13 +36,13 @@ class App extends Component {
   }
 
   render() {
-    const { dispatch, userId, userPlaylist, selectedPlaylist, ...others } = this.props
+    const { dispatch, userId, userPlaylist, selectedPlaylist, selectedTrack, ...others } = this.props
     return(
       <div id="netease-music">
         <header>
           <div className="logo">
           </div>
-          <h1>Netease Music</h1>
+          <h1 className="titlefont">网易云音乐</h1>
           <History/>
           <SearchBar/>
           <ToolBar/>
@@ -52,9 +54,7 @@ class App extends Component {
               onPlaylistClick={id => {dispatch(loadSelectedPlaylist(id))}}
             />
           </aside>
-          <PlaylistDetail
-            playlist={selectedPlaylist}
-          />
+          <PlaylistDetail />
         </main>
         <footer>
           <Player />
@@ -72,7 +72,8 @@ function mapStateToProps(state) {
     userId: state.userId,
     userPlaylist: state.userPlaylist,
     selectedPlaylist: state.selectedPlaylist,
-    errorMsg: state.error
+    selectedTrack: state.selectedTrack,
+    error: state.error,
   }
 }
 

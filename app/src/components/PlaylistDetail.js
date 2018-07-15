@@ -1,26 +1,31 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { convertDate, msToTime, formatNumber } from '../utils/util'
+
+import { loadTrack } from '../actions/PlaylistAction'
 
 class PlaylistDetail extends Component {
   constructor (props) {
     super(props)
-    this.handleClick = handleClick.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
-//   static defaultProps = {
-//     playlist: {
-//       name: 1
-//     }
-//   }
-  handleClick() {
+  state = {
 
   }
+
+  handleClick(id) {
+    console.log(id)
+    this.props.activateSelectedTrack(id)
+  }
+
   render() {
-    const playlist = this.props.playlist
+    const { playlist, activateSelectedTrack } = this.props
+    console.log(playlist)
     const createTime = convertDate(playlist.createTime)
     const coverImgUrl = playlist.coverImgUrl || require('../resources/img/placeholder-track.png')
     const avatarUrl = playlist.creator.avatarUrl || ''
-    console.log(playlist)
+    const dispatch = this.props.dispatch
     
     return (
       <div className="playlist-detail">
@@ -72,7 +77,7 @@ class PlaylistDetail extends Component {
                   const artist = track.artists.length ? track.artists[0] : {name: ''}
                   const album = track.album || {name: ''}
                   return (
-                    <tr key={index} onClick={}>
+                    <tr key={index} onClick={() => this.handleClick(track.id)}>
                       <td>{formatNumber(index + 1)}</td>
                       <td>{trackName}</td>
                       <td>{artist.name}</td>
@@ -92,4 +97,20 @@ class PlaylistDetail extends Component {
   }
 }
 
-export default PlaylistDetail
+function mapStateToProps(state, ownProps) {
+  return {
+    playlist: state.selectedPlaylist
+  }
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    activateSelectedTrack: (id) => {
+      dispatch(loadTrack(id))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlaylistDetail);
+
+// export default PlaylistDetail
