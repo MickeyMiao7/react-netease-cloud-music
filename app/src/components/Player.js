@@ -31,31 +31,80 @@ const handle = (props) => {
 class Player extends Component {
   constructor(props) {
     super(props)
+    this.handlePlayClick = this.handlePlayClick.bind(this)
+    this.onVolChange = this.onVolChange.bind(this)
   }
+
+  static defaultValue = {
+    isPlaying: false,
+  }
+
+  state = {
+    volume: 100,
+    curTime: 0,
+  }
+
+  componentDidMount() {
+    this.audio = this.refs['audio']
+
+    this.audio.onended = () => {
+
+      console.log("end")
+    }
+
+    this.audio.ontimeupdate = () => {
+      const cur = Math.floor(this.audio.currentTime)
+      if (cur != this.state.curTime) {
+      this.setState({
+          curTime: cur
+        })
+      }
+    }
+  }
+
+  handlePlayClick() {
+    console.log('Click the "play" button')
+    if (this.props.isPlaying === false) {
+      this.audio.play()
+    }
+    else 
+      this.audio.pause()
+    this.props.isPlaying = !this.props.isPlaying
+  }
+
+  onVolChange(value) {
+    this.audio.volume = value / 100
+    this.setState({
+      volume: value
+    })
+  }
+
   render() {
-    const src = `http://music.163.com/song/media/outer/url?id=${this.props.selectedTrack}.mp3`
-    console.log(`In Player, ID=${src}`)
+    const track = this.props.selectedTrack
+    console.log(track)
+    const src = track.id ? `http://music.163.com/song/media/outer/url?id=${track.id}.mp3` : ''
+    console.log(`In audio, src=${src}`)
     
     return (
       <div className="player">
         <div className="player-control">
           <span className="iconfont icon-skipprevious"></span>
-          <span className="iconfont icon-play"></span>
+          <span ref="play" className="iconfont icon-play" onClick={this.handlePlayClick}></span>
           <span className="iconfont icon-skipnext"></span>
         </div>
 
         <div className="time-bar">
-          <span className="current-time">00:00</span>
-          
           <Slider class="time" defaultValue={0} handle={handle} />
+          <span className="current-time">00:00</span> / 
           <span className="duration">00:00</span>
         </div>
 
         <div className="volume">
           <span className="iconfont icon-volumemedium"></span>
-          <Slider class="vol" defaultValue={0} handle={handle} />
+          <Slider ref="vol" class="vol" defaultValue={this.state.volume} handle={handle} onChange={this.onVolChange} />
         </div>
         <audio
+          ref="audio"
           src={src}
           autoPlay>
         </audio>

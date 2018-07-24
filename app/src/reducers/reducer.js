@@ -13,7 +13,7 @@ const defaultStates = {
     coverImgUrl: '',
     tracks: []
   },
-  selectedTrack: 0
+  selectedTrack: {}
 }
 
 function login(state=0, action) {

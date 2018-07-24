@@ -13,22 +13,30 @@ export function loadSelectedPlaylist(id) {
   }
 }
 
-export function loadTrack(trackId) {
+export function loadTrack(track) {
   return dispatch => {
-    requestTrack(trackId, dispatch)
+    requestTrack(track, dispatch)
   }
 }
 
-function requestTrack(trackId, dispatch) {
-  dispatch({type: 'REQUEST_TRACK', trackId})
-  console.log(trackId)
-  axios.get(`/api/music/url?id=${trackId}`, {
-  })
-  .then(response => {
-    console.log(response)
-    dispatch({type: ActionTypes.RECEIVE_TRACK_SUCCESS, data: trackId})
+function requestTrack(track, dispatch) {
+  dispatch({type: 'REQUEST_TRACK', track})
+  // const url = `/api/music/url?id=${track.id}`
+  const url = '/weapi/song/enhance/player/url'
+  // console.log(url)
+  // axios.post(url, {
+  //   ids: [track.id],
+  //   br: '',
+  //   csrf_token: ''
+  // })
 
-  })
+  // .then(response => {
+  //   console.log(response)
+  //   dispatch({type: ActionTypes.RECEIVE_TRACK_SUCCESS, data: track})
+
+  // })
+  
+    dispatch({type: ActionTypes.RECEIVE_TRACK_SUCCESS, data: track})
 }
 
 function requestUserPlaylist(userId, dispatch) {

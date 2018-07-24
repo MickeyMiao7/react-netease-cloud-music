@@ -7,7 +7,7 @@ class SearchBar extends Component {
   render() {
     return (
       <div className="search-bar">
-        <input type="text" name="searchtext" placeholder="搜索" />
+        <input type="text" name="searchtext" placeholder="搜索音乐、歌手、歌词、用户" />
         <span className="iconfont icon-search"></span>
       </div>
     )

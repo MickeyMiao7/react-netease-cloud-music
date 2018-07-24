@@ -14,14 +14,13 @@ class PlaylistDetail extends Component {
 
   }
 
-  handleClick(id) {
-    console.log(id)
-    this.props.activateSelectedTrack(id)
+  handleClick(track) {
+    console.log(track)
+    this.props.activateSelectedTrack(track)
   }
 
   render() {
     const { playlist, activateSelectedTrack } = this.props
-    console.log(playlist)
     const createTime = convertDate(playlist.createTime)
     const coverImgUrl = playlist.coverImgUrl || require('../resources/img/placeholder-track.png')
     const avatarUrl = playlist.creator.avatarUrl || ''
@@ -77,7 +76,7 @@ class PlaylistDetail extends Component {
                   const artist = track.artists.length ? track.artists[0] : {name: ''}
                   const album = track.album || {name: ''}
                   return (
-                    <tr key={index} onClick={() => this.handleClick(track.id)}>
+                    <tr key={index} onClick={() => this.handleClick(track)}>
                       <td>{formatNumber(index + 1)}</td>
                       <td>{trackName}</td>
                       <td>{artist.name}</td>
@@ -105,8 +104,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
-    activateSelectedTrack: (id) => {
-      dispatch(loadTrack(id))
+    activateSelectedTrack: (track) => {
+      dispatch(loadTrack(track))
     }
   }
 }

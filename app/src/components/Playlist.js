@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+
 class Playlist extends Component {
   constructor (props) {
     super(props)
@@ -17,7 +18,6 @@ class Playlist extends Component {
       })
       this.props.onPlaylistClick(id);
     }
-
   }
 
 
