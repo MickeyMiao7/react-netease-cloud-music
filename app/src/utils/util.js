@@ -16,3 +16,16 @@ export function msToTime(duration) {
 export function formatNumber(number) {
   return ('0' + number).slice(-2)
 }
+
+
+export function formatDuration(duration) {
+  let total = Math.floor(duration / 1000)
+  let minute = Math.floor(total / 60)
+  let second = total % 60
+
+  return [zeroPad(minute), zeroPad(second)]
+}
+
+function zeroPad(number) {
+  return number < 10 ? '0' + number.toString() : number.toString()
+}

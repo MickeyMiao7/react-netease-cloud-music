@@ -8,6 +8,8 @@ import { connect } from 'react-redux'
 
 import ClientService from '../service/ClientService'
 
+import {formatDuration} from '../utils/util'
+
 const clientService = new ClientService()
 const createSliderWithTooltip = Slider.createSliderWithTooltip
 const Handle = Slider.Handle
@@ -33,30 +35,37 @@ class Player extends Component {
     super(props)
     this.handlePlayClick = this.handlePlayClick.bind(this)
     this.onVolChange = this.onVolChange.bind(this)
+    this.onTimeSliderChange = this.onTimeSliderChange.bind(this)
   }
 
   static defaultValue = {
-    isPlaying: false,
+    duration: 0
   }
 
   state = {
+    isPlaying: false,
     volume: 100,
     curTime: 0,
+    curTimePercentage: 0,
   }
 
   componentDidMount() {
     this.audio = this.refs['audio']
 
     this.audio.onended = () => {
-
       console.log("end")
     }
 
     this.audio.ontimeupdate = () => {
       const cur = Math.floor(this.audio.currentTime)
+      
       if (cur != this.state.curTime) {
-      this.setState({
-          curTime: cur
+        // console.log(`duration: ${this.props.duration}, cur: ${cur * 1000}`)
+        // let curTimePercentage = (cur * 1000 * 100 / this.props.duration).toFixed(1)
+        let curTimePercentage = cur * 1000 * 100 / this.props.duration
+        this.setState({
+          curTime: cur,
+          curTimePercentage: curTimePercentage
         })
       }
     }
@@ -64,12 +73,16 @@ class Player extends Component {
 
   handlePlayClick() {
     console.log('Click the "play" button')
-    if (this.props.isPlaying === false) {
+    if (this.state.isPlaying === false) {
       this.audio.play()
     }
     else 
       this.audio.pause()
-    this.props.isPlaying = !this.props.isPlaying
+    this.setState(
+      {
+        isPlaying:  !this.state.isPlaying
+      }
+    )
   }
 
   onVolChange(value) {
@@ -79,10 +92,33 @@ class Player extends Component {
     })
   }
 
+  onTimeSliderChange(value) {
+    this.audio.currentTime = Math.floor(value * this.props.duration / (100 * 1000))
+    this.setState(
+      {
+        currentTime: this.audio.currentTime,
+        curTimePercentage: value
+      }
+    )
+    // console.log(`Current time changed to: ${this.audio.currentTime}`)
+  }
+
   render() {
     const track = this.props.selectedTrack
     console.log(track)
     const src = track.id ? `http://music.163.com/song/media/outer/url?id=${track.id}.mp3` : ''
+
+    this.props.duration = track.duration || 0
+    let _duration = formatDuration(this.props.duration)
+
+    // let curTime = this.state.curTime
+    const {curTime, curTimePercentage} = this.state
+    let _curTime = formatDuration(curTime * 1000)
+
+
+
+    // const currentTime = this.state.
+    
     console.log(`In audio, src=${src}`)
     
     return (
@@ -93,10 +129,14 @@ class Player extends Component {
           <span className="iconfont icon-skipnext"></span>
         </div>
 
+        <div className="time-bar-slider">
+          <Slider class="time" step={0.1} min={0} max={100} defaultValue={0} value={curTimePercentage} handle={handle} onChange={this.onTimeSliderChange} />
+          <Slider defaultValue={0} handle={handle} />
+        </div>
+
         <div className="time-bar">
-          <Slider class="time" defaultValue={0} handle={handle} />
-          <span className="current-time">00:00</span> / 
-          <span className="duration">00:00</span>
+          <span className="current-time">{_curTime[0]}:{_curTime[1]}</span> 
+          <span className="duration">/ {_duration[0]}:{_duration[1]}</span>
         </div>
 
         <div className="volume">
