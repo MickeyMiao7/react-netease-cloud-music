@@ -1,0 +1,8 @@
+@font-face { font-family: "titlefont"; src: url('titlefont.ttf'); } 
+.titlefont {
+  font-family:"titlefont" !important;
+  font-weight: normal;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+}
