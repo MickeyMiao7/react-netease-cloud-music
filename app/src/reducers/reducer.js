@@ -13,7 +13,12 @@ const defaultStates = {
     coverImgUrl: '',
     tracks: []
   },
-  selectedTrack: {}
+  playingTrack: {
+    id: 0
+  },
+  nextTrack: {
+    id: 0
+  }
 }
 
 function login(state=0, action) {
@@ -42,13 +47,41 @@ function selectedPlaylist(state=defaultStates.playlist, action) {
     default:
       return state;
   }
-
 }
 
-function selectedTrack(state=defaultStates.selectedTrack, action) {
+function playingPlaylist(state=defaultStates.playlist, action) {
+  switch (action.type) {
+    case ActionTypes.SET_PLAYING_PLAYLIST:
+      return action.data
+    default: 
+      return state
+  }
+}
+
+function playingTrack(state=defaultStates.playingTrack, action) {
   switch (action.type) {
     case ActionTypes.RECEIVE_TRACK_SUCCESS:
       return action.data
+    default:
+      return state
+  }
+}
+
+function nextTrack(state=defaultStates.nextTrack, action) {
+  switch (action.type) {
+    case ActionTypes.SET_NEXT_TRACK:
+      return action.data
+    default:
+      return state
+  }
+}
+
+function isPlaying(state=false, action) {
+  switch (action.type) {
+    case ActionTypes.PLAYER_PLAY:
+      return true
+    case ActionTypes.PLAYER_PAUSE:
+      return false
     default:
       return state
   }
@@ -69,8 +102,11 @@ const reducer = combineReducers({
   userId: login,
   userPlaylist: userPlayList,
   selectedPlaylist: selectedPlaylist,
-  selectedTrack: selectedTrack,
-  error: error
+  playingPlaylist: playingPlaylist,
+  playingTrack: playingTrack,
+  isPlaying: isPlaying,
+  error: error,
+  nextTrack: nextTrack
 })
 
 export default reducer 

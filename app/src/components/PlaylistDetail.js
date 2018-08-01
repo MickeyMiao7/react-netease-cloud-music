@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { convertDate, msToTime, formatNumber } from '../utils/util'
 
-import { loadTrack } from '../actions/PlaylistAction'
+import { loadTrack, setNextTrack, setPlayingPlaylist } from '../actions/PlaylistAction'
+import { play } from '../actions/PlayerAction'
 
 class PlaylistDetail extends Component {
   constructor (props) {
@@ -14,15 +15,19 @@ class PlaylistDetail extends Component {
 
   }
 
-  handleClick(track) {
-    console.log(track)
+  handleClick(track, playlist) {
+
+    const tracks = playlist.tracks
+    const index = tracks.indexOf(track)
     this.props.activateSelectedTrack(track)
+    this.props.play()
+    this.props.setNextTrack(tracks[index == tracks.length - 1 ? 0 : index + 1])
+    this.props.setPlayingPlaylist(playlist)
   }
 
   render() {
-    const { playlist, activateSelectedTrack } = this.props
+    const { playlist, playingTrack, activateSelectedTrack } = this.props
     const createTime = convertDate(playlist.createTime)
-    console.log(createTime)
     const coverImgUrl = playlist.coverImgUrl || require('../resources/img/placeholder-track.png')
     const avatarUrl = playlist.creator.avatarUrl || ''
     const dispatch = this.props.dispatch
@@ -66,10 +71,10 @@ class PlaylistDetail extends Component {
               <tr>
                 <td className="index"></td>
                 <td className="operation">操作</td>
-                <td className="name">音乐标题</td>
+                <td className="title">音乐标题</td>
                 <td className="artists">歌手</td>
                 <td className="album">专辑</td>
-                <td className="time">时长</td>
+                <td className="duration">时长</td>
               </tr>
             </thead>
             <tbody>
@@ -79,13 +84,16 @@ class PlaylistDetail extends Component {
                   const artist = track.artists.length ? track.artists[0] : {name: ''}
                   const album = track.album || {name: ''}
                   return (
-                    <tr key={index} onClick={() => this.handleClick(track)}>
-                      <td>{formatNumber(index + 1)}</td>
+                    <tr key={index} onClick={() => this.handleClick(track, playlist)}>
+                      <td>{playingTrack.id == track.id ? 
+                        <span className="iconfont icon-volumemedium"></span> : 
+                        formatNumber(index + 1)}
+                      </td>
                       <td></td> 
                       <td>{trackName}</td>
                       <td>{artist.name}</td>
                       <td>{album.name}</td>
-                      <td>{msToTime(track.duration)}</td>
+                      <td className="duration">{msToTime(track.duration)}</td>
                     </tr>
                   ) 
                 })
@@ -102,7 +110,8 @@ class PlaylistDetail extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    playlist: state.selectedPlaylist
+    playlist: state.selectedPlaylist,
+    playingTrack: state.playingTrack
   }
 }
 
@@ -110,6 +119,18 @@ function mapDispatchToProps(dispatch, ownProps) {
   return {
     activateSelectedTrack: (track) => {
       dispatch(loadTrack(track))
+    },
+
+    play: ()=> {
+      dispatch(play())
+    },
+
+    setNextTrack: (track) => {
+      dispatch(setNextTrack(track))
+    },
+
+    setPlayingPlaylist: (playlist) => {
+      dispatch(setPlayingPlaylist(playlist))
     }
   }
 }

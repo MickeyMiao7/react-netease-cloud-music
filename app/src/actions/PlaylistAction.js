@@ -19,6 +19,20 @@ export function loadTrack(track) {
   }
 }
 
+export function setNextTrack(track) {
+  return {
+    type: ActionTypes.SET_NEXT_TRACK,
+    data: track
+  }
+}
+
+export function setPlayingPlaylist(playlist) {
+  return {
+    type: ActionTypes.SET_PLAYING_PLAYLIST,
+    data: playlist
+  }
+}
+
 function requestTrack(track, dispatch) {
   dispatch({type: 'REQUEST_TRACK', track})
   // const url = `/api/music/url?id=${track.id}`

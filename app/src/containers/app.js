@@ -76,7 +76,10 @@ function mapStateToProps(state) {
     userId: state.userId,
     userPlaylist: state.userPlaylist,
     selectedPlaylist: state.selectedPlaylist,
-    selectedTrack: state.selectedTrack,
+    playingPlaylist: state.playingPlaylist,
+    playingTrack: state.playingTrack,
+    nextTrack: state.nextTrack,
+    isPlaying: state.isPlaying,
     error: state.error,
   }
 }
