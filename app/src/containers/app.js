@@ -19,12 +19,16 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // const userId = 1404833398
     let userId = 47458264
     // let userId = 78843035
     const dispatch = this.props.dispatch
-    dispatch(login(userId))
-    dispatch(loadUserPlaylist(userId))
+    new Promise((resolve, reject)=> {
+      dispatch(login(userId))
+      resolve()
+    })
+    .then(()=> {
+      dispatch(loadUserPlaylist(userId))
+    })
     // dispatch(loadUserPlaylist(this.props.userId))
     // this.props.dispatch(
      //  dispatch({ type: 'REQUEST_USER_LOGIN' })

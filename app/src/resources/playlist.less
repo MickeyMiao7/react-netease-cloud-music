@@ -1,6 +1,7 @@
 ul.side-bar {
   margin: 0;
   padding: 0;
+  width: 100%;
 
   li {
     margin: 0;
@@ -25,6 +26,13 @@ ul.side-bar {
         display: flex;
         align-items: center;
         
+        .overflow-container {
+
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
         &:hover {
           color: #000000;
         }
@@ -36,11 +44,11 @@ ul.side-bar {
             content: "";
             display: block;
             position: absolute;
-            top: 0;
+            top: 10%;
             left: 0;
             width: 1px;
-            height: 100%;
-            border-left: 4px solid @theme-color;
+            height: 80%;
+            border-left: 3px solid @theme-color;
           }
         }
       

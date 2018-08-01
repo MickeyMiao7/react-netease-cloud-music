@@ -72,17 +72,22 @@ class Player extends Component {
   }
 
   handlePlayClick() {
-    console.log('Click the "play" button')
-    if (this.state.isPlaying === false) {
-      this.audio.play()
-    }
-    else 
-      this.audio.pause()
-    this.setState(
-      {
-        isPlaying:  !this.state.isPlaying
+    if (this.audio && this.audio.readyState === 4){
+      if (this.state.isPlaying === false) {
+        this.audio.play()
       }
-    )
+      else
+        this.audio.pause()
+      this.setState(
+        {
+          isPlaying: !this.state.isPlaying
+        }
+      )
+      console.log(`isPlaying changed to ${this.state.isPlaying}`)
+    }
+    else if (this.audio && this.audio.readyState != 4) {
+      console.log(`audio is not ready: current state ${this.audio.readyState}`)
+    }
   }
 
   onVolChange(value) {
@@ -112,10 +117,8 @@ class Player extends Component {
     let _duration = formatDuration(this.props.duration)
 
     // let curTime = this.state.curTime
-    const {curTime, curTimePercentage} = this.state
+    const {curTime, curTimePercentage, isPlaying} = this.state
     let _curTime = formatDuration(curTime * 1000)
-
-
 
     // const currentTime = this.state.
     
@@ -125,18 +128,17 @@ class Player extends Component {
       <div className="player">
         <div className="player-control">
           <span className="iconfont icon-skipprevious"></span>
-          <span ref="play" className="iconfont icon-play" onClick={this.handlePlayClick}></span>
+          <span ref="play" className={"iconfont " + (isPlaying ? "icon-pause" : "icon-play")} onClick={this.handlePlayClick} ></span>
           <span className="iconfont icon-skipnext"></span>
         </div>
 
         <div className="time-bar-slider">
           <Slider class="time" step={0.1} min={0} max={100} defaultValue={0} value={curTimePercentage} handle={handle} onChange={this.onTimeSliderChange} />
-          <Slider defaultValue={0} handle={handle} />
         </div>
 
         <div className="time-bar">
           <span className="current-time">{_curTime[0]}:{_curTime[1]}</span> 
-          <span className="duration">/ {_duration[0]}:{_duration[1]}</span>
+          <span className="duration">/{_duration[0]}:{_duration[1]}</span>
         </div>
 
         <div className="volume">
@@ -159,5 +161,6 @@ function mapStateToProps(state, ownProps) {
     selectedTrack: state.selectedTrack
   }
 }
+
 
 export default connect(mapStateToProps)(Player)

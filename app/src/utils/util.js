@@ -3,7 +3,7 @@ export function convertDate(timestamp) {
   if (typeof timestamp === 'number' && timestamp.toString().length === 13) {
     date = new Date(timestamp)
   }
-  return `${date.getYear() + 1900}-${date.getMonth() + 1}-${date.getDay()}`
+  return `${date.getYear() + 1900}-${formatNumber(date.getMonth() + 1)}-${formatNumber(date.getDate())}`
 }
 
 export function msToTime(duration) {

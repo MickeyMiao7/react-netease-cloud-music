@@ -10,9 +10,9 @@
 
   > header {
     box-sizing: border-box;
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: @header-height;
+    height: 60px;
+
+    flex: 0 0 @header-height;
 
     padding: 2px 10px;
     display: flex;
@@ -46,14 +46,18 @@
 
     display: flex;
 
+    overflow: auto;
+
     > aside {
       width: @side-bar-width;
       min-width: 250px;
       background-color: @theme-aside-bg-color;
       border-right: 1px solid @theme-separator-color;
+      overflow: auto;
     }
 
     .playlist-detail {
+      overflow: auto;
       width: 100% - @side-bar-width;
     }
 
@@ -61,7 +65,7 @@
 
 
   > footer {
-    flex-basis: @footer-height;
+    flex: 0 0 @footer-height;
 
     display: flex;
     align-items: center;

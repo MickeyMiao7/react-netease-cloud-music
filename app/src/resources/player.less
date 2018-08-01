@@ -1,8 +1,13 @@
 .player {
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   > .player-control {
+    box-sizing: border-box;
+    min-width: 65px; 
+    flex: 0 0 @player-control-width;
     display: flex;
     align-items: center;
     color: #fff;
@@ -22,17 +27,30 @@
       &:hover {
         background-color: @theme-player-span-hover-color;
       }
+
+      &.icon-play, &.icon-pause {
+        width: 34px;
+        height: 34px;
+        line-height: 34px;
+      }
+
+      &.icon-play {
+        font-size: 13px;
+        text-indent: 4px;
+      }
     }
 
-    > span.icon-play {
-      width: 34px;
-      height: 34px;
-
-      line-height: 32px;
-      font-size: 13px;
-    }
   }
-    
+
+  .time-bar-slider {
+    flex: 1 1 auto;
+  }
+
+  .time-bar {
+    flex: 0 0 85px;
+    font-size: 8px;
+  }
+
   .rc-slider {
     margin: 0 10px;
 
@@ -51,8 +69,8 @@
 
         display: block;
 
-        width: 5px;
-        height: 5px;
+        width: 4px;
+        height: 4px;
         background-color: @theme-color;
         border-radius: 50%;
       }
@@ -74,11 +92,13 @@
     align-items: center;
  }
 
- .time-bar {
+  .time-bar {
+    color: #888888;
 
- }
+  }
 
   .volume {
+    flex: 0 0 @player-control-width;
     margin: 0 30px;
     width: 200px;
     display: flex;

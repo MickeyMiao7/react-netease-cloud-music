@@ -22,6 +22,7 @@ class PlaylistDetail extends Component {
   render() {
     const { playlist, activateSelectedTrack } = this.props
     const createTime = convertDate(playlist.createTime)
+    console.log(createTime)
     const coverImgUrl = playlist.coverImgUrl || require('../resources/img/placeholder-track.png')
     const avatarUrl = playlist.creator.avatarUrl || ''
     const dispatch = this.props.dispatch
@@ -58,11 +59,13 @@ class PlaylistDetail extends Component {
           <nav className="track-tab">
             <a href="" className="selected">歌曲列表</a>
             <a href="">评论</a>
+            <a href="">收藏者</a>
           </nav>
           <table className="track-table">
             <thead>
               <tr>
                 <td className="index"></td>
+                <td className="operation">操作</td>
                 <td className="name">音乐标题</td>
                 <td className="artists">歌手</td>
                 <td className="album">专辑</td>
@@ -78,6 +81,7 @@ class PlaylistDetail extends Component {
                   return (
                     <tr key={index} onClick={() => this.handleClick(track)}>
                       <td>{formatNumber(index + 1)}</td>
+                      <td></td> 
                       <td>{trackName}</td>
                       <td>{artist.name}</td>
                       <td>{album.name}</td>

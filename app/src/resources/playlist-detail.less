@@ -3,22 +3,25 @@
   flex-direction: column;
 
   > .intro  {
-    flex-basis: @playlist-intro-height;
-    padding-top: 15px;
-    padding-left: 25px;
+    box-sizing: border-box;
+    flex: 0 0 @playlist-intro-height;
+    padding-top: 30px;
+    padding-left: 30px;
 
     display: flex;
     flex-direction: row; 
     background-color: @theme-intro-bg-color;
 
     img.cover {
-      flex: 0 0 250px;
+      flex: 0 0 180px;
 
       display: block;
+      box-sizing: border-box;
 
-      width: 250px;
-      height: 250px;
+      width: 180px;
+      height: 180px;
       border: 1px solid #cacbcc;
+      -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(70%, transparent) , to(rgba(250, 250, 250, 0.1)));
     }
 
 
@@ -89,7 +92,7 @@
 
       span.creator-nickname {
         margin-left: 6px;
-        color: #888888;
+        color: #000;
         &:hover {
           color: #444444;
           cursor: pointer;
@@ -107,12 +110,15 @@
   }
 
   > .table {
+    overflow: hidden;
+    flex: 0 0 auto;
     nav.track-tab {
       display: flex;
-      padding-left: 20px;
-      border-bottom: 1px solid @theme-color;
+      padding-left: 30px;
+      border-bottom: 2px solid @theme-color;
       a {
-        margin: 0 4px;
+        font-size: 13px;
+        margin: 0 2px;
         padding: 6px 0;
         width: 90px;
         height: 20px;
@@ -139,6 +145,7 @@
     }
 
     table.track-table {
+      font-size: 12px;
       table-layout: fixed;
       border-collapse: collapse;
 
@@ -154,6 +161,13 @@
         white-space: nowrap;
         overflow-x: hidden;
         text-overflow: ellipsis;
+        
+        &.index {
+          width: 30px;
+        }
+        &.operation {
+          width: 55px;
+        }
       }
 
       tbody {

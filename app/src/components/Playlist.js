@@ -35,7 +35,10 @@ class Playlist extends Component {
                  let { name, id, ...others } = playlist
                  let cls = id === selectedId ? 'selected' : ''
                  return (
-                   <li onClick={() => {this.handleClick(id)}} key={id} className={cls}><span className="iconfont icon-musicmenu"></span>{name}
+                   <li onClick={() => {this.handleClick(id)}} key={id} className={cls}>
+                    <div className="overflow-container">
+                      <span className="iconfont icon-musicmenu"></span>{name}
+                    </div>
                    </li>
                  )
               })
