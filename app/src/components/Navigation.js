@@ -38,17 +38,15 @@ class Navigation extends Component {
         </li>
         <li><p className="side-bar-header">我的音乐</p></li>
         <li><p className="side-bar-header">创建的歌单</p>
-          <ul className="playlist">
+          <ul>
             {
               userPlaylist.map((playlist) => {
                  let { name, id } = playlist
                  return (
                    <li onClick={() => {this.handleClick(id)}} key={id} >
-                    <div className="overflow-container">
-                      <NavLink to={`/playlist/${id}`} activeClassName="selected">
-                        <span className="iconfont icon-musicmenu"></span>{name}
-                      </NavLink>
-                    </div>
+                     <NavLink to={`/playlist/${id}`} activeClassName="selected">
+                       <span className="iconfont icon-musicmenu"></span>{name}
+                     </NavLink>
                    </li>
                  )
               })

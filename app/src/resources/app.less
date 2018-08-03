@@ -4,6 +4,7 @@
 
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   color: @theme-text-color;
   background-color: @theme-bg-color;
@@ -49,16 +50,18 @@
     overflow: auto;
 
     > aside {
-      width: @side-bar-width;
+      flex: 1 1 @side-bar-width;
       min-width: 250px;
       background-color: @theme-aside-bg-color;
       border-right: 1px solid @theme-separator-color;
       overflow: auto;
     }
 
-    .playlist-detail {
-      overflow: auto;
-      width: 100% - @side-bar-width;
+    .playlist {
+      overflow-x: hidden;
+      overflow-y: auto;
+      flex: 0 0 100% - @side-bar-width;
+      min-width: 805px;
     }
 
   }

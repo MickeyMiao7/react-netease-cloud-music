@@ -96,17 +96,16 @@ class Playlist extends Component {
             </section>
          </div>
         </div>
-        <div className="table">
-          <nav className="track-tab">
-            <NavLink to={`/comment`} activeClassName="selected">评论</NavLink>
-            <a href="" className="selected">歌曲列表</a>
-            <a href="">评论</a>
-            <a href="">收藏者</a>
-          </nav>
-          
+        <nav className="track-tab">
+          <NavLink to={`/comment`} activeClassName="selected">评论</NavLink>
+          <a href="" className="selected">歌曲列表</a>
+          <a href="">评论</a>
+          <a href="">收藏者</a>
+        </nav>
+
           {/* <Route path="/comment" component={Comment} /> */}
           
-          {/* <table className="track-table">
+          <table className="track-list">
             <thead>
               <tr>
                 <td className="index"></td>
@@ -139,9 +138,8 @@ class Playlist extends Component {
                 })
               }
             </tbody>
-          </table> */}
+          </table>
 
-        </div>
 
       </div>
       </BrowserRouter>
