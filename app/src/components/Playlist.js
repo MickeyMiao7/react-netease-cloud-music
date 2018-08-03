@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { BrowserRouter, NavLink, Route } from 'react-router-dom'
+
 import { convertDate, msToTime, formatNumber } from '../utils/util'
 
 import { loadTrack, loadPlaylist, setNextTrack, setPlayingPlaylist, load } from '../actions/PlaylistAction'
 import { play } from '../actions/PlayerAction'
+
+import Comment from './Comment'
 
 class Playlist extends Component {
   constructor (props) {
@@ -56,13 +60,16 @@ class Playlist extends Component {
     // console.log(this.props.lastPlaylist)
 
     const playlist = this.props.lastPlaylist
+    console.log(playlist)
+    console.log(this.props.match)
     const { playingTrack } = this.props
     const createTime = convertDate(playlist.createTime)
     const coverImgUrl = playlist.coverImgUrl || require('../resources/img/placeholder-track.png')
     const avatarUrl = playlist.creator.avatarUrl || ''
     
     return (
-      <div className="playlist-detail">
+      <BrowserRouter basename={`${this.props.match.url}`}> 
+      <div className="playlist">
         <div className="intro">
           <img className="cover" src={coverImgUrl} alt=""/>
           <div className="content">
@@ -91,11 +98,15 @@ class Playlist extends Component {
         </div>
         <div className="table">
           <nav className="track-tab">
+            <NavLink to={`/comment`} activeClassName="selected">评论</NavLink>
             <a href="" className="selected">歌曲列表</a>
             <a href="">评论</a>
             <a href="">收藏者</a>
           </nav>
-          <table className="track-table">
+          
+          {/* <Route path="/comment" component={Comment} /> */}
+          
+          {/* <table className="track-table">
             <thead>
               <tr>
                 <td className="index"></td>
@@ -128,11 +139,12 @@ class Playlist extends Component {
                 })
               }
             </tbody>
-          </table>
+          </table> */}
 
         </div>
 
       </div>
+      </BrowserRouter>
     )
   }
 }
