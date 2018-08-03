@@ -12,9 +12,7 @@ const rootElement = document.getElementById('root')
 render(
   <AppContainer>
     <Provider store={store}>
-      {/* <BrowserRouter basename="/"> */}
-        <App />
-      {/* </BrowserRouter> */}
+      <App />
     </Provider>
   </AppContainer>,
   rootElement

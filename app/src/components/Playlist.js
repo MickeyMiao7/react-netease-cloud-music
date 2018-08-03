@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { convertDate, msToTime, formatNumber } from '../utils/util'
 
-import { loadTrack, setNextTrack, setPlayingPlaylist } from '../actions/PlaylistAction'
+import { loadTrack, loadPlaylist, setNextTrack, setPlayingPlaylist, load } from '../actions/PlaylistAction'
 import { play } from '../actions/PlayerAction'
 
 class Playlist extends Component {
@@ -16,7 +16,6 @@ class Playlist extends Component {
   }
 
   handleClick(track, playlist) {
-
     const tracks = playlist.tracks
     const index = tracks.indexOf(track)
     this.props.activateSelectedTrack(track)
@@ -25,12 +24,42 @@ class Playlist extends Component {
     this.props.setPlayingPlaylist(playlist)
   }
 
+ componentDidMount() {
+    // console.log(this.props.match.params.id)
+    this.props.loadPlaylist(this.props.match.params.id)
+  }
+
+  componentWillUpdate() {
+    // console.log(this.props.load(this.props.match.params.id))
+    // console.log('Update')
+    // this.props.loadPlaylist(this.props.match.params.id)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.match.params.id != this.props.match.params.id) {
+      this.props.loadPlaylist(nextProps.match.params.id)
+    }
+  }
+
+  componentDidUpdate() {
+
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return nextProps.lastPlaylist.id != this.props.lastPlaylist.id
+  }
+
   render() {
-    const { playlist, playingTrack, activateSelectedTrack } = this.props
+    // const id = this.props.match.params.id
+    // this.props.loadPlaylist(id)
+
+    // console.log(this.props.lastPlaylist)
+
+    const playlist = this.props.lastPlaylist
+    const { playingTrack } = this.props
     const createTime = convertDate(playlist.createTime)
     const coverImgUrl = playlist.coverImgUrl || require('../resources/img/placeholder-track.png')
     const avatarUrl = playlist.creator.avatarUrl || ''
-    const dispatch = this.props.dispatch
     
     return (
       <div className="playlist-detail">
@@ -111,7 +140,8 @@ class Playlist extends Component {
 function mapStateToProps(state, ownProps) {
   return {
     playlist: state.selectedPlaylist,
-    playingTrack: state.playingTrack
+    playingTrack: state.playingTrack,
+    lastPlaylist: state.lastPlaylist
   }
 }
 
@@ -131,7 +161,12 @@ function mapDispatchToProps(dispatch, ownProps) {
 
     setPlayingPlaylist: (playlist) => {
       dispatch(setPlayingPlaylist(playlist))
-    }
+    },
+
+    loadPlaylist: (id) => {
+      dispatch(loadPlaylist(id))
+    },
+    load: load
   }
 }
 

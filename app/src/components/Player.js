@@ -51,6 +51,12 @@ class Player extends Component {
     this.audio = this.refs['audio']
 
     this.audio.onended = this.nextSong
+    // this.audio.onprogress = () => {
+    //   console.log('onprogress')
+    // }
+    // this.audio.oncanplay = () => {
+    //   console.log('oncanplay')
+    // }
 
     this.audio.ontimeupdate = () => {
       const cur = Math.floor(this.audio.currentTime)

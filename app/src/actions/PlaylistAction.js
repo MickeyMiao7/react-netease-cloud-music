@@ -7,9 +7,9 @@ export function loadUserPlaylist(userId) {
   }
 }
 
-export function loadSelectedPlaylist(id) {
+export function loadPlaylist(id) {
   return dispatch => {
-    requestPlaylistDetail(id, dispatch)
+    requestPlaylist(id, dispatch)
   }
 }
 
@@ -70,7 +70,7 @@ function requestUserPlaylist(userId, dispatch) {
   })
 }
 
-function requestPlaylistDetail(id, dispatch) {
+function requestPlaylist(id, dispatch) {
   dispatch({type: 'REQUEST_PLAYLIST_DETAIL', id})
   axios.get('/api/playlist/detail', {
     params: {
@@ -83,4 +83,21 @@ function requestPlaylistDetail(id, dispatch) {
   .catch((error) => {
     dispatch({type: ActionTypes.RECEIVE_PLAYLIST_DETAIL_FAILURE, data: error})
   })
+}
+
+export function load(id) {
+  // dispatch({type: 'REQUEST_PLAYLIST_DETAIL', id})
+  // return axios.get('/api/playlist/detail', {
+  //   params: {
+  //     id
+  //   }
+  // })
+  // .then((response) => {
+  //   dispatch({type: ActionTypes.RECEIVE_PLAYLIST_DETAIL_SUCCESS, data: response.data.result})
+  //   return response.data.response
+  // })
+  // .catch((error) => {
+  //   dispatch({type: ActionTypes.RECEIVE_PLAYLIST_DETAIL_FAILURE, data: error})
+  //   return error
+  // })
 }

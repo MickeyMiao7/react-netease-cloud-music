@@ -17,7 +17,7 @@ class Navigation extends Component {
       this.setState({
         selectedId: id,
       })
-      this.props.onPlaylistClick(id);
+      // this.props.onPlaylistClick(id);
     }
   }
 

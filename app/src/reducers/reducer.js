@@ -13,10 +13,12 @@ const defaultStates = {
     coverImgUrl: '',
     tracks: []
   },
+
   playingTrack: {
     id: 0,
     duration: 0
   },
+
   nextTrack: {
     id: 0
   }
@@ -41,7 +43,7 @@ function userPlayList(state=[], action) {
   }
 }
 
-function selectedPlaylist(state=defaultStates.playlist, action) {
+function lastPlaylist(state=defaultStates.playlist, action) {
   switch (action.type) {
     case ActionTypes.RECEIVE_PLAYLIST_DETAIL_SUCCESS:
       return action.data
@@ -102,7 +104,7 @@ function error(state='', action) {
 const reducer = combineReducers({
   userId: login,
   userPlaylist: userPlayList,
-  selectedPlaylist: selectedPlaylist,
+  lastPlaylist: lastPlaylist,
   playingPlaylist: playingPlaylist,
   playingTrack: playingTrack,
   isPlaying: isPlaying,

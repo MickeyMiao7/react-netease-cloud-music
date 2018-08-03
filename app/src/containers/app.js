@@ -58,7 +58,7 @@ class App extends Component {
           <aside>
             <Navigation 
               userPlaylist={userPlaylist}
-              onPlaylistClick={id => {dispatch(loadSelectedPlaylist(id))}}
+              // onPlaylistClick={id => {dispatch(loadSelectedPlaylist(id))}}
             />
           </aside>
           <Route path="/playlist/:id" component={ Playlist } />
@@ -86,6 +86,7 @@ function mapStateToProps(state) {
     nextTrack: state.nextTrack,
     isPlaying: state.isPlaying,
     error: state.error,
+    lastPlaylist: state.lastPlaylist
   }
 }
 
