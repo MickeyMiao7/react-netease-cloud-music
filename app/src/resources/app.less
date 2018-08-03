@@ -47,7 +47,8 @@
 
     display: flex;
 
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     > aside {
       flex: 1 1 @side-bar-width;
@@ -61,7 +62,6 @@
       overflow-x: hidden;
       overflow-y: auto;
       flex: 0 0 100% - @side-bar-width;
-      min-width: 805px;
     }
 
   }
