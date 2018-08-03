@@ -14,7 +14,8 @@ const defaultStates = {
     tracks: []
   },
   playingTrack: {
-    id: 0
+    id: 0,
+    duration: 0
   },
   nextTrack: {
     id: 0

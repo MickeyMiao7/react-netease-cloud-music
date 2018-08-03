@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { BrowserRouter, Route } from 'react-router-dom'
+
+import Recommendation from '../components/Recommendation'
 import History from '../components/History'
 import SearchBar from '../components/SearchBar'
 import ToolBar from '../components/Toolbar'
 import Player from '../components/Player'
+import Navigation from '../components/Navigation'
 import Playlist from '../components/Playlist'
-import PlaylistDetail from '../components/PlaylistDetail'
 
 import { login } from '../actions/UserAction'
 import { loadUserPlaylist, loadSelectedPlaylist } from '../actions/PlaylistAction'
 
-import ActionTypes from '../actions/ActionTypes'
 
 class App extends Component {
   constructor(props) {
@@ -42,6 +44,7 @@ class App extends Component {
   render() {
     const { dispatch, userId, userPlaylist, selectedPlaylist, selectedTrack, ...others } = this.props
     return(
+      <BrowserRouter basename="/">
       <div id="netease-music">
         <header>
           <div className="logo">
@@ -53,29 +56,31 @@ class App extends Component {
         </header>
         <main>
           <aside>
-            <Playlist 
+            <Navigation 
               userPlaylist={userPlaylist}
               onPlaylistClick={id => {dispatch(loadSelectedPlaylist(id))}}
             />
           </aside>
-          <PlaylistDetail />
+          <Route path="/playlist/:id" component={ Playlist } />
+          <Route path="/recommendation" component={ Recommendation } />
+          {/* <Recommendation /> */}
+          
         </main>
         <footer>
           <Player />
         </footer>
       </div>
+      </BrowserRouter >
     )
   }
 
 }
 
 function mapStateToProps(state) {
-  // console.log('connect state', state)
 
   return {
     userId: state.userId,
     userPlaylist: state.userPlaylist,
-    selectedPlaylist: state.selectedPlaylist,
     playingPlaylist: state.playingPlaylist,
     playingTrack: state.playingTrack,
     nextTrack: state.nextTrack,
@@ -84,11 +89,6 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    // login: userId => dispatch(login(userId))
-  }
-}
 
 // export default connect(mapStateToProps, mapDispatchToProps)(App)
 export default connect(mapStateToProps)(App)

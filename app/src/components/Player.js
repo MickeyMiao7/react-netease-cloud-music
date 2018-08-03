@@ -130,7 +130,7 @@ class Player extends Component {
     let _duration = formatDuration(this.props.duration)
 
     // let curTime = this.state.curTime
-    const {curTime, curTimePercentage} = this.state
+    const { curTime, curTimePercentage } = this.state
     let _curTime = formatDuration(curTime * 1000)
 
     // const currentTime = this.state.

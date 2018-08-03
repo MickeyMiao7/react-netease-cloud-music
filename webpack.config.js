@@ -17,7 +17,7 @@ module.exports = {
         app: [ENTRY_PATH, CSS_PATH]
     },
     output: {
-        publicPath: '', //编译好的文件，在服务器的路径,这是静态资源引用路径
+        publicPath: '/', //编译好的文件，在服务器的路径,这是静态资源引用路径
         path: BUILD_PATH, 
         filename: 'bundle-[hash:5].js', 
         chunkFilename: '[name].[chunkhash:5].min.js'
