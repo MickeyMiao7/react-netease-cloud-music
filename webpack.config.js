@@ -28,7 +28,14 @@ module.exports = {
         inline: true,
         hot: true,
         proxy: {
-            "/api/**": {
+            '/3rdpartyAPI/*': {
+                'target': 'http://localhost:3000',
+                pathRewrite: {'^/3rdpartyAPI/' : ''},
+                ignorePath: false,
+                changeOrigin: true,
+                secure: false,
+            },
+            "/api/*": {
                 "target": "http://music.163.com",
                 ignorePath: false,
                 changeOrigin: true,

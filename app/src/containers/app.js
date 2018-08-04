@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 
 import Recommendation from '../components/Recommendation'
 import History from '../components/History'
@@ -19,18 +19,27 @@ class App extends Component {
     super(props)
     // console.log(this.props)
   }
+  
+  async userLogin(id) {
+    const { dispatch } = this.props
+    await dispatch(login(id))
+    await dispatch(loadUserPlaylist(id))
+  }
 
   componentDidMount() {
     let userId = 47458264
     // let userId = 78843035
-    const dispatch = this.props.dispatch
-    new Promise((resolve, reject)=> {
-      dispatch(login(userId))
-      resolve()
-    })
-    .then(()=> {
-      dispatch(loadUserPlaylist(userId))
-    })
+
+    this.userLogin(userId)
+    // const dispatch = this.props.dispatch
+    // new Promise((resolve, reject)=> {
+    //   dispatch(login(userId))
+    //   resolve()
+    // })
+    // .then(()=> {
+    //   dispatch(loadUserPlaylist(userId))
+    // })
+
     // dispatch(loadUserPlaylist(this.props.userId))
     // this.props.dispatch(
      //  dispatch({ type: 'REQUEST_USER_LOGIN' })
@@ -61,8 +70,18 @@ class App extends Component {
               // onPlaylistClick={id => {dispatch(loadSelectedPlaylist(id))}}
             />
           </aside>
-          <Route path="/playlist/:id" component={ Playlist } />
-          <Route path="/recommendation" component={ Recommendation } />
+          <section className="main-page">
+          <Switch>
+              <Route path="/" exact component={Recommendation} />
+
+              <Route path="/playlist/:id" component={Playlist} />
+              <Route path="/recommendation" component={Recommendation} />
+              <Redirect path="/" to={{
+                pathname: '/recommendation'
+              }
+              } />
+          </Switch>
+          </section>
           {/* <Recommendation /> */}
           
         </main>

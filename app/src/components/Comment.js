@@ -7,7 +7,7 @@ class Comment extends Component {
 
   render() {
     return (
-      <h1> Comment Page </h1>
+    <h1> Comment Page {this.props.match.url}</h1>
     )
   }
 

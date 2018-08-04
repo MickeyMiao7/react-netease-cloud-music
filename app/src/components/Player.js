@@ -129,10 +129,9 @@ class Player extends Component {
     const track = this.props.playingTrack, 
           isPlaying = this.props.isPlaying
 
-    // console.log(track)
     const src = track.id ? `http://music.163.com/song/media/outer/url?id=${track.id}.mp3` : ''
 
-    this.props.duration = track.duration || 0
+    this.props.duration = track.dt || 0
     let _duration = formatDuration(this.props.duration)
 
     // let curTime = this.state.curTime

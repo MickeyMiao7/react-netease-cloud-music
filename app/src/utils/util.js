@@ -14,7 +14,9 @@ export function msToTime(duration) {
 }
 
 export function formatNumber(number) {
-  return ('0' + number).slice(-2)
+  if (number < 100)
+    return ('0' + number).slice(-2)
+  return number.toString()
 }
 
 

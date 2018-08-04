@@ -55,11 +55,16 @@ function requestTrack(track, dispatch) {
 
 function requestUserPlaylist(userId, dispatch) {
   dispatch({type: 'REQUEST_USER_PLAYLIST', userId})
-  axios.get('/api/user/playlist/', {
+  // axios.get('/api/user/playlist/', {
+  //   params: {
+  //     offset: 0,
+  //     limit: 1000,
+  //     uid: userId
+  //   }
+  // })
+  axios.get('/3rdpartyAPI/user/playlist', {
     params: {
-      offset: 0,
-      limit: 1000,
-      uid: userId
+      uid: userId,
     }
   })
   .then(response => {
@@ -72,32 +77,22 @@ function requestUserPlaylist(userId, dispatch) {
 
 function requestPlaylist(id, dispatch) {
   dispatch({type: 'REQUEST_PLAYLIST_DETAIL', id})
-  axios.get('/api/playlist/detail', {
-    params: {
-      id
-    }
-  })
-  .then((response) => {
-    dispatch({type: ActionTypes.RECEIVE_PLAYLIST_DETAIL_SUCCESS, data: response.data.result})
-  })
-  .catch((error) => {
-    dispatch({type: ActionTypes.RECEIVE_PLAYLIST_DETAIL_FAILURE, data: error})
-  })
-}
-
-export function load(id) {
-  // dispatch({type: 'REQUEST_PLAYLIST_DETAIL', id})
-  // return axios.get('/api/playlist/detail', {
+  // axios.get('/api/playlist/detail', {
   //   params: {
   //     id
   //   }
   // })
-  // .then((response) => {
-  //   dispatch({type: ActionTypes.RECEIVE_PLAYLIST_DETAIL_SUCCESS, data: response.data.result})
-  //   return response.data.response
-  // })
-  // .catch((error) => {
-  //   dispatch({type: ActionTypes.RECEIVE_PLAYLIST_DETAIL_FAILURE, data: error})
-  //   return error
-  // })
+
+  axios.get('/3rdpartyAPI/playlist/detail', {
+    params: {
+      id: id,
+      s: 20
+    }
+  })
+  .then((response) => {
+    dispatch({type: ActionTypes.RECEIVE_PLAYLIST_DETAIL_SUCCESS, data: response.data.playlist})
+  })
+  .catch((error) => {
+    dispatch({type: ActionTypes.RECEIVE_PLAYLIST_DETAIL_FAILURE, data: error})
+  })
 }

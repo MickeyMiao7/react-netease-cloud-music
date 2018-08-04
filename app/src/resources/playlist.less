@@ -1,6 +1,9 @@
 .playlist {
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
   // overflow: hidden;
 
   > .intro  {
@@ -146,14 +149,14 @@
 
   table.track-list {
     flex: 0 0 auto;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
     box-sizing: border-box;
     font-size: 12px;
     table-layout: fixed;
     border-collapse: collapse;
 
     width: 100%;
-    over-flow-x: hidden;
 
     tr {
       height: 30px;
@@ -167,7 +170,7 @@
       text-overflow: ellipsis;
       
       &.index {
-        width: 30px;
+        width: 50px;
       }
       &.operation {
         width: 55px;

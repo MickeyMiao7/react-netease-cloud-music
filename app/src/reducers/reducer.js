@@ -11,7 +11,8 @@ const defaultStates = {
     playCount: 0,
     trackCount: 0,
     coverImgUrl: '',
-    tracks: []
+    tracks: [],
+    subscribers: []
   },
 
   playingTrack: {

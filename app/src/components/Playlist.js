@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter, NavLink, Route } from 'react-router-dom'
+import { Redirect, Switch, NavLink, Route } from 'react-router-dom'
 
 import { convertDate, msToTime, formatNumber } from '../utils/util'
 
@@ -8,6 +8,8 @@ import { loadTrack, loadPlaylist, setNextTrack, setPlayingPlaylist, load } from 
 import { play } from '../actions/PlayerAction'
 
 import Comment from './Comment'
+import Subscriber from './subscriber'
+import TrackList from './TrackList'
 
 class Playlist extends Component {
   constructor (props) {
@@ -49,9 +51,10 @@ class Playlist extends Component {
 
   }
 
-  shouldComponentUpdate(nextProps) {
-    return nextProps.lastPlaylist.id != this.props.lastPlaylist.id
-  }
+  // shouldComponentUpdate(nextProps) {
+  //     return nextProps.lastPlaylist.id != this.props.lastPlaylist.id
+  // }
+
 
   render() {
     // const id = this.props.match.params.id
@@ -60,15 +63,18 @@ class Playlist extends Component {
     // console.log(this.props.lastPlaylist)
 
     const playlist = this.props.lastPlaylist
+    const subscribers = playlist.subscribers || []
     console.log(playlist)
-    console.log(this.props.match)
-    const { playingTrack } = this.props
+    // console.log(subscribers)
+    // console.log(this.props.match)
     const createTime = convertDate(playlist.createTime)
     const coverImgUrl = playlist.coverImgUrl || require('../resources/img/placeholder-track.png')
     const avatarUrl = playlist.creator.avatarUrl || ''
+
     
     return (
-      <BrowserRouter basename={`${this.props.match.url}`}> 
+      // <BrowserRouter basename={`${this.props.match.url}`}> 
+      // <BrowserRouter basename="/"> 
       <div className="playlist">
         <div className="intro">
           <img className="cover" src={coverImgUrl} alt=""/>
@@ -97,14 +103,23 @@ class Playlist extends Component {
          </div>
         </div>
         <nav className="track-tab">
-          <NavLink to={`/comment`} activeClassName="selected">评论</NavLink>
-          <a href="" className="selected">歌曲列表</a>
-          <a href="">评论</a>
-          <a href="">收藏者</a>
+          <NavLink to={`${this.props.match.url}/track-list`} activeClassName="selected">歌曲列表</NavLink>
+          <NavLink to={`${this.props.match.url}/comment`} activeClassName="selected">评论</NavLink>
+          <NavLink to={`${this.props.match.url}/subscriber`} activeClassName="selected">收藏者</NavLink>
+          {/* <a href="" className="selected">歌曲列表</a> */}
+          {/* <a href="">评论</a> */}
+          {/* <a href="">收藏者</a> */}
         </nav>
 
-          {/* <Route path="/comment" component={Comment} /> */}
-          
+        <Switch>
+          <Route path={`${this.props.match.path}/track-list`} component={TrackList} />
+          <Route path={`${this.props.match.path}/comment`} component={Comment} />
+          <Route path={`${this.props.match.path}/subscriber`} render={(props) => <Subscriber {...props} subscribers={subscribers} />} />
+          <Redirect path={`${this.props.match.path}`} to={{
+            pathname: `${this.props.match.path}/track-list`
+          }}/>
+        </Switch>
+{/*           
           <table className="track-list">
             <thead>
               <tr>
@@ -138,18 +153,17 @@ class Playlist extends Component {
                 })
               }
             </tbody>
-          </table>
+          </table> */}
 
 
       </div>
-      </BrowserRouter>
+      // </BrowserRouter>
     )
   }
 }
 
 function mapStateToProps(state, ownProps) {
   return {
-    playlist: state.selectedPlaylist,
     playingTrack: state.playingTrack,
     lastPlaylist: state.lastPlaylist
   }
@@ -176,7 +190,6 @@ function mapDispatchToProps(dispatch, ownProps) {
     loadPlaylist: (id) => {
       dispatch(loadPlaylist(id))
     },
-    load: load
   }
 }
 
