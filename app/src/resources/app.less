@@ -32,6 +32,15 @@
       background-size: 100%;
     }
 
+    .title {
+      box-sizing: border-box;
+      background: url('./img/title.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 150px;
+      height: 45px;
+    }
+
     > h1 {
       margin-left: 4px;
     }
@@ -51,19 +60,22 @@
     overflow-x: hidden;
 
     > aside {
-      flex: 1 1 @side-bar-width;
-      min-width: 250px;
+      box-sizing: border-box;
+      flex: 1 0 @side-bar-width;
+      min-width: 200px;
       background-color: @theme-aside-bg-color;
       border-right: 1px solid @theme-separator-color;
       overflow: auto;
     }
 
     section.main-page {
+      box-sizing: border-box;
+      flex: 0 0 100% - @side-bar-width;
+      min-width: 800px;
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
       overflow-y: auto;
-      flex: 0 0 100% - @side-bar-width;
     }
 
   }

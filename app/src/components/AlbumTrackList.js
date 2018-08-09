@@ -8,30 +8,32 @@ import { msToTime, formatNumber } from '../utils/util'
 
 import { NavLink } from 'react-router-dom'
 
-class TrackList extends Component {
+class AlbumTrackList extends Component {
   constructor(props) {
     super(props)
-    this.handleClick = this.handleClick.bind(this)
+    this.handleSongClick = this.handleSongClick.bind(this)
   }
 
-  handleClick(track, playlist) {
+  static defaultProps = {
+    tracks: []
+  }
+
+  handleSongClick(song, songs, album) {
     const playingTrack = this.props.playingTrack
-    if (track.id != playingTrack.id) {
-      const tracks = playlist.tracks
-      const index = tracks.indexOf(track)
-      this.props.activateSelectedTrack(track)
+    const playlist = Object.assign({}, {tracks: songs, type: "album"}, album)
+    if (song.id != playingTrack.id) {
+      const index = songs.indexOf(song)
+      this.props.activateSelectedTrack(song)
       this.props.play()
-      this.props.setNextTrack(tracks[index == tracks.length - 1 ? 0 : index + 1])
+      this.props.setNextTrack(songs[index == songs.length - 1 ? 0 : index + 1])
       this.props.setPlayingPlaylist(playlist)
     }
   }
 
   render() {
-    
-    const playlist = this.props.lastPlaylist
+    const { tracks, playingTrack, album } = this.props
     // console.log(playlist)
     // console.log(this.props.match)
-    const { playingTrack } = this.props
     return (
       <table className="track-list">
         <thead>
@@ -46,7 +48,7 @@ class TrackList extends Component {
         </thead>
         <tbody>
           {
-            playlist.tracks.map((track, index) => {
+            tracks.map((track, index) => {
               const trackName = track.alia.length ? track.alia[0] : track.name
               const artist = track.ar.length ? track.ar[0] : { name: '' }
               const album = track.al || { name: '' }
@@ -55,12 +57,12 @@ class TrackList extends Component {
                   if (event.target.tagName == 'A' ) {
                     return
                   } 
-                  this.handleClick(track, playlist)
-                }}>
+                  this.handleSongClick(track, tracks, album)
+                  }}>
                   <td>
                     {formatNumber(index + 1)}
                   </td>
-                  <td className="operation">
+                  <td className="td-operation">
                     <span className={"iconfont icon-play-circle " + (playingTrack.id == track.id ? "playing": "")}></span>
                   </td>
                   <td>{trackName}</td>
@@ -80,7 +82,6 @@ class TrackList extends Component {
 function mapStateToProps(state, ownProps) {
   return {
     playingTrack: state.playingTrack,
-    lastPlaylist: state.lastPlaylist
   }
 }
 
@@ -108,4 +109,4 @@ function mapDispatchToProps(dispatch, ownProps) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrackList)
+export default connect(mapStateToProps, mapDispatchToProps)(AlbumTrackList)

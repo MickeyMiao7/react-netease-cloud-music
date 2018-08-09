@@ -2,38 +2,22 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect, Switch, NavLink, Route } from 'react-router-dom'
 
-import { convertDate, msToTime, formatNumber } from '../utils/util'
+import { convertDate } from '../utils/util'
 
-import { loadTrack, loadPlaylist, setNextTrack, setPlayingPlaylist, load } from '../actions/PlaylistAction'
-import { play } from '../actions/PlayerAction'
+import { loadPlaylist } from '../actions/PlaylistAction'
 
 import Comment from './Comment'
-import Subscriber from './subscriber'
+import Subscriber from './Subscriber'
 import TrackList from './TrackList'
 
 class Playlist extends Component {
   constructor (props) {
     super(props)
-    this.handleClick = this.handleClick.bind(this)
-  }
-
-  state = {
-
-  }
-
-  handleClick(track, playlist) {
-    const tracks = playlist.tracks
-    const index = tracks.indexOf(track)
-    this.props.activateSelectedTrack(track)
-    this.props.play()
-    this.props.setNextTrack(tracks[index == tracks.length - 1 ? 0 : index + 1])
-    this.props.setPlayingPlaylist(playlist)
   }
 
  componentDidMount() {
-    // console.log(this.props.match.params.id)
     this.props.loadPlaylist(this.props.match.params.id)
-  }
+ }
 
   componentWillUpdate() {
     // console.log(this.props.load(this.props.match.params.id))
@@ -56,7 +40,7 @@ class Playlist extends Component {
   // }
 
 
-  render() {
+   render() {
     // const id = this.props.match.params.id
     // this.props.loadPlaylist(id)
 
@@ -64,17 +48,15 @@ class Playlist extends Component {
 
     const playlist = this.props.lastPlaylist
     const subscribers = playlist.subscribers || []
-    console.log(playlist)
-    // console.log(subscribers)
-    // console.log(this.props.match)
+    // console.log(playlist)
+
+    const commentCount = playlist.commentCount || 0
     const createTime = convertDate(playlist.createTime)
     const coverImgUrl = playlist.coverImgUrl || require('../resources/img/placeholder-track.png')
     const avatarUrl = playlist.creator.avatarUrl || ''
 
     
     return (
-      // <BrowserRouter basename={`${this.props.match.url}`}> 
-      // <BrowserRouter basename="/"> 
       <div className="playlist">
         <div className="intro">
           <img className="cover" src={coverImgUrl} alt=""/>
@@ -82,16 +64,16 @@ class Playlist extends Component {
             <section>
               <div className="title">
                 <span className="label-playlist">歌单</span>
-                <span className="playlist-title">我喜欢的音乐</span>
+                <span className="playlist-title">{playlist.name}</span>
               </div>
               <div className="count">
                 <div>
                   <p>歌曲数</p>
-                  <p>{playlist.trackCount}</p>
+                  <p className="bold">{playlist.trackCount}</p>
                 </div>
                 <div>
                   <p>播放数</p>
-                  <p>{playlist.playCount}</p>
+                  <p className="bold">{playlist.playCount}</p>
                 </div>
               </div>
             </section>
@@ -104,60 +86,20 @@ class Playlist extends Component {
         </div>
         <nav className="track-tab">
           <NavLink to={`${this.props.match.url}/track-list`} activeClassName="selected">歌曲列表</NavLink>
-          <NavLink to={`${this.props.match.url}/comment`} activeClassName="selected">评论</NavLink>
+          <NavLink to={`${this.props.match.url}/comment`} activeClassName="selected">评论({commentCount})</NavLink>
           <NavLink to={`${this.props.match.url}/subscriber`} activeClassName="selected">收藏者</NavLink>
-          {/* <a href="" className="selected">歌曲列表</a> */}
-          {/* <a href="">评论</a> */}
-          {/* <a href="">收藏者</a> */}
+  
         </nav>
 
         <Switch>
           <Route path={`${this.props.match.path}/track-list`} component={TrackList} />
-          <Route path={`${this.props.match.path}/comment`} component={Comment} />
+          <Route path={`${this.props.match.path}/comment`} render={(props) => <Comment {...props} type="playlist" />} />
           <Route path={`${this.props.match.path}/subscriber`} render={(props) => <Subscriber {...props} subscribers={subscribers} />} />
-          <Redirect path={`${this.props.match.path}`} to={{
+          <Redirect path={this.props.match.path} to={{
             pathname: `${this.props.match.path}/track-list`
           }}/>
         </Switch>
-{/*           
-          <table className="track-list">
-            <thead>
-              <tr>
-                <td className="index"></td>
-                <td className="operation">操作</td>
-                <td className="title">音乐标题</td>
-                <td className="artists">歌手</td>
-                <td className="album">专辑</td>
-                <td className="duration">时长</td>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                playlist.tracks.map((track, index) => {
-                  const trackName = track.alias.length ? track.alias[0] : track.name
-                  const artist = track.artists.length ? track.artists[0] : {name: ''}
-                  const album = track.album || {name: ''}
-                  return (
-                    <tr key={index} onClick={() => this.handleClick(track, playlist)}>
-                      <td>{playingTrack.id == track.id ? 
-                        <span className="iconfont icon-volumemedium"></span> : 
-                        formatNumber(index + 1)}
-                      </td>
-                      <td></td> 
-                      <td>{trackName}</td>
-                      <td>{artist.name}</td>
-                      <td>{album.name}</td>
-                      <td className="duration">{msToTime(track.duration)}</td>
-                    </tr>
-                  ) 
-                })
-              }
-            </tbody>
-          </table> */}
-
-
       </div>
-      // </BrowserRouter>
     )
   }
 }
@@ -171,22 +113,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
-    activateSelectedTrack: (track) => {
-      dispatch(loadTrack(track))
-    },
-
-    play: ()=> {
-      dispatch(play())
-    },
-
-    setNextTrack: (track) => {
-      dispatch(setNextTrack(track))
-    },
-
-    setPlayingPlaylist: (playlist) => {
-      dispatch(setPlayingPlaylist(playlist))
-    },
-
+    dispatch: dispatch,
     loadPlaylist: (id) => {
       dispatch(loadPlaylist(id))
     },

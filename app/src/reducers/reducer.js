@@ -12,11 +12,13 @@ const defaultStates = {
     trackCount: 0,
     coverImgUrl: '',
     tracks: [],
-    subscribers: []
+    subscribers: [],
+    commentCount: 0
   },
 
   playingTrack: {
     id: 0,
+    url: '',
     duration: 0
   },
 

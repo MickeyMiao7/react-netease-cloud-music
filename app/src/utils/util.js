@@ -6,6 +6,18 @@ export function convertDate(timestamp) {
   return `${date.getYear() + 1900}-${formatNumber(date.getMonth() + 1)}-${formatNumber(date.getDate())}`
 }
 
+export function convertCommentDate(timestamp) {
+  if (typeof timestamp === 'number' && timestamp.toString().length === 13) {
+    const currentDate = new Date
+    const date = new Date(timestamp)
+    if (date.getYear() < currentDate.getYear()) {
+
+      return `${date.getYear() + 1900}年${date.getMonth() + 1}月${date.getDate()}日${date.getHours()}:${date.getMinutes()}`
+    }
+    return `${date.getMonth() + 1}月${date.getDate()}日${date.getHours()}:${date.getMinutes()}`
+  }
+}
+
 export function msToTime(duration) {
   const total = parseInt(duration / 1000)
   const minutes = parseInt(total / 60)
@@ -30,4 +42,12 @@ export function formatDuration(duration) {
 
 function zeroPad(number) {
   return number < 10 ? '0' + number.toString() : number.toString()
+}
+
+
+export function convertPlayCount(count) {
+  if (count > 100000) {
+    return `${Math.floor(count / 10000)}万`
+  }
+  return count
 }

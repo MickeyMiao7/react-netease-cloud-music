@@ -19,6 +19,12 @@ export function loadTrack(track) {
   }
 }
 
+export function loadPlaylistComment(id) {
+  return dispatch => {
+    requetPlaylistComment(id, dispatch)
+  }
+}
+
 export function setNextTrack(track) {
   return {
     type: ActionTypes.SET_NEXT_TRACK,
@@ -36,7 +42,18 @@ export function setPlayingPlaylist(playlist) {
 function requestTrack(track, dispatch) {
   dispatch({type: 'REQUEST_TRACK', track})
   // const url = `/api/music/url?id=${track.id}`
-  const url = '/weapi/song/enhance/player/url'
+  axios.get('/3rdpartyAPI/music/url', {
+    params: {
+      id: track.id
+    }
+  }).then(response => {
+    const _track = Object.assign({}, track, {url: response.data.data[0].url})
+    dispatch({type: ActionTypes.RECEIVE_TRACK_SUCCESS, data: _track})
+  }).catch(error => {
+    const _track = Object.assign({}, track, {url: `https://music.163.com/song/media/outer/url?id=${track.id}.mp3`})
+    dispatch({type: ActionTypes.RECEIVE_TRACK_FAILURE, data: error })
+    dispatch({type: ActionTypes.RECEIVE_TRACK_SUCCESS, data: _track})
+  })
   // console.log(url)
   // axios.post(url, {
   //   ids: [track.id],
@@ -96,3 +113,4 @@ function requestPlaylist(id, dispatch) {
     dispatch({type: ActionTypes.RECEIVE_PLAYLIST_DETAIL_FAILURE, data: error})
   })
 }
+

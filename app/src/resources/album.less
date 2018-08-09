@@ -1,0 +1,126 @@
+.album {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+ 
+  a {
+    &:link, &:visited, &:hover, &:active {
+      color: #000;
+    }
+  }
+  
+  span.publish-time {
+    color: #888888;
+  }
+
+  > .intro  {
+    box-sizing: border-box;
+    flex: 0 0 @playlist-intro-height;
+    padding-top: 30px;
+    padding-left: 30px;
+
+    display: flex;
+    background-color: @theme-intro-bg-color;
+
+    .cover {
+      width: 210px;
+      height: 180px;
+      position: relative;
+      background-image: url('./img/album-cover.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    img.album-pic {
+      width: 180px;
+      height: 180px;
+    }
+
+
+    > .content  {
+      padding-left: 30px;
+      padding-right: 10px;
+      flex-grow: 1;
+
+      .title {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        span.label-theme-color {
+          padding: 3px 8px;
+          font-size: 12px;
+          background-color: @theme-color;
+          color: #fff;
+          border-radius: 4px;
+          border: 1px solid @theme-color;
+        }
+
+        span.album-name {
+          margin-left: 10px;
+          font-size: 150%;
+          color: @theme-playlist-title-color;
+        }
+      }
+
+      .others {
+        margin-top: 80px;
+        display: flex;
+        flex-direction: column;
+
+        font-weight: bolder;
+        font-size: 12px;
+        a {
+          &, &:link, &:visited, &:hover, &:active{
+            color: rgb(12, 115, 194);
+          }
+        }
+        span {
+          font-weight: normal;
+        }
+
+        section:not(:first-child) {
+          margin-top: 15px;
+        }
+      }
+    }
+
+  }
+
+  nav.tab {
+    flex: 0 0 auto;
+    display: flex;
+    padding-left: 30px;
+    margin-right: 10px;
+    border-bottom: 2px solid @theme-color;
+    a {
+      font-size: 14px;
+      margin: 0 2px;
+      padding: 6px 0;
+      width: 90px;
+      height: 20px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: #000;
+      cursor: pointer;
+      background-color: #f2f2f2;
+      border: 1px solid #c1c1c1;
+      border-bottom: none;
+
+      &:hover{
+        background-color: #f2f2f2;
+      }
+
+      &.selected {
+        color: #fff;
+        background-color: @theme-color;
+      }
+    }
+  }
+
+}

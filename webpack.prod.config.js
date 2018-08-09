@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require("clean-webpack-plugin")
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 
 const ROOT_PATH = path.resolve(__dirname)
@@ -17,12 +18,14 @@ module.exports = {
         app: [ENTRY_PATH, CSS_PATH]
     },
     output: {
-        publicPath: '/', //编译好的文件，在服务器的路径,这是静态资源引用路径
+        publicPath: '/', 
         path: BUILD_PATH, 
         filename: 'bundle-[hash:5].js', 
         chunkFilename: '[name].[chunkhash:5].min.js'
     },
     devServer: {
+        host: '0.0.0.0',
+        port: 8080,
         contentBase: BUILD_PATH, 
         historyApiFallback: true, // 不跳转
         inline: true,
@@ -56,7 +59,7 @@ module.exports = {
         }
     },
     
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'cheap-module-source-map',
     resolve: {
         extensions: ['.js', '.jsx', '.less', '.css', '.html'] 
     },
@@ -91,10 +94,19 @@ module.exports = {
             include: [APP_PATH]
         }]
     },
+
+    
+    optimization: {
+      minimizer: [
+        new UglifyJsPlugin()
+      ]
+    },
+
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
-          template: path.resolve(SRC_PATH, 'templates/index.tmpl.html')
+          template: path.resolve(SRC_PATH, 'templates/index.tmpl.html'),
+          favicon: 'app/src/resources/img/logo.ico'
         }),
         new ExtractTextPlugin('styles.css'),
         new CleanWebpackPlugin(path.resolve(BUILD_PATH, '*.*'), {

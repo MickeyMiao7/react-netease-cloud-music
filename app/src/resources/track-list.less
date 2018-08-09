@@ -1,0 +1,102 @@
+table.track-list {
+  flex: 0 0 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+  font-size: 12px;
+  table-layout: fixed;
+  border-collapse: collapse;
+
+  width: 100%;
+  a {
+    &, &:link, &:visited, &:hover, &:active {
+      color: #222;
+      width: 100%;
+    }
+  }
+  tr {
+    height: 30px;
+  }
+
+  td {
+    box-sizing: border-box;
+    padding: 0 8px;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    
+    &.td-index {
+      width: 50px;
+    }
+    &.td-operation {
+      width: 55px;
+      text-align: center;
+    }
+    &.td-title {
+      width: 40%;
+    }
+    &.td-artist {
+      width: 21%;
+    }
+    &.td-album {
+      width: 16.5%
+    }
+    &.td-duration {
+      width: 8%;
+      color: #888888;
+    }
+
+    span.iconfont {
+      color: #a5a4a5;
+    }
+    .icon-volumemedium {
+      font-size: 10px;
+    }
+    .icon-play-circle {
+      font-size: 18px;
+      cursor: pointer;
+      &:hover {
+        color: #555555;
+      }
+      &.playing {
+        color: @theme-color;
+      }
+    }
+  }
+
+  tbody {
+    overflow-y: hidden;
+    tr {
+      &:nth-child(2n - 1) {
+        background-color: #f3f3f3;
+      }
+
+      // &:hover {
+        // background-color: #ebeced;
+      // }
+
+      &:active, &.selected {
+        background-color: #e0e0e0;
+      }
+      td:first-child {
+        text-align: right;
+      }
+    }
+  }
+
+  thead {
+    color: #666666;
+    tr {
+      border-bottom: 1px solid @theme-separator-color;
+
+      td:hover {
+        background-color: #ebeced;
+      }
+
+      td:not(:first-child) {
+        border-left: 1px solid @theme-separator-color;
+      }
+
+    }
+  }
+}

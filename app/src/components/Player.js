@@ -33,6 +33,7 @@ class Player extends Component {
     super(props)
     this.handlePlayClick = this.handlePlayClick.bind(this)
     this.handleNextClick = this.handleNextClick.bind(this)
+    this.handlePrevClick = this.handlePrevClick.bind(this)
     this.onVolChange = this.onVolChange.bind(this)
     this.onTimeSliderChange = this.onTimeSliderChange.bind(this)
   }
@@ -45,10 +46,17 @@ class Player extends Component {
     volume: 100,
     curTime: 0,
     curTimePercentage: 0,
+    loading: false
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // console.log('Will Receive Props')
+    // console.log(this.props.playingTrack)
   }
 
   componentDidMount() {
     this.audio = this.refs['audio']
+    this.timeSlider = this.refs['time-slider']
 
     this.audio.onended = this.nextSong
     // this.audio.onprogress = () => {
@@ -57,7 +65,26 @@ class Player extends Component {
     // this.audio.oncanplay = () => {
     //   console.log('oncanplay')
     // }
+    this.audio.onloadstart = () => {
+      if (this.props.playingTrack.url) {
+        this.setState({
+          loading: true
+        })
+      }
+    }
 
+    this.audio.oncanplaythrough = ()=> {
+      this.setState({
+        loading: false
+      })
+    }
+
+    this.audio.onabort = ()=> {
+      this.setState({
+        loading: false
+      })
+    }
+    window.aa = this.audio
     this.audio.ontimeupdate = () => {
       const cur = Math.floor(this.audio.currentTime)
       
@@ -91,7 +118,6 @@ class Player extends Component {
 
   nextSong = () => { 
     const { nextTrack, loadTrack, playingPlaylist, setNextTrack } = this.props
-
     loadTrack(nextTrack)
 
     const tracks = playingPlaylist.tracks
@@ -103,8 +129,23 @@ class Player extends Component {
 
   }
 
+
+  prevSong = () => {
+    const { loadTrack, playingPlaylist, setNextTrack, playingTrack } = this.props
+    const tracks = playingPlaylist.tracks.map(playlist => playlist.id)
+    const index = tracks.indexOf(playingTrack.id)
+    const newTrack = playingPlaylist.tracks[index == 0 ? tracks.length - 1 : index - 1]
+
+    loadTrack(newTrack)
+    setNextTrack(playingTrack)
+  } 
+
   handleNextClick() {
     this.nextSong()
+  }
+
+  handlePrevClick() {
+    this.prevSong()
   }
 
   onVolChange(value) {
@@ -122,15 +163,24 @@ class Player extends Component {
         curTimePercentage: value
       }
     )
-    // console.log(`Current time changed to: ${this.audio.currentTime}`)
+  }
+  
+  shouldComponentUpdate(nextProps) {
+    return true
+  }
+
+  componentDidUpdate() {
   }
 
   render() {
     const track = this.props.playingTrack, 
           isPlaying = this.props.isPlaying
 
-    const src = track.id ? `http://music.163.com/song/media/outer/url?id=${track.id}.mp3` : ''
+    // const src = track.id ? `http://music.163.com/song/media/outer/url?id=${track.id}.mp3` : ''
+    let src = this.props.playingTrack.url
+    // console.log(this.props.playingTrack)
 
+    // console.log(src)
     this.props.duration = track.dt || 0
     let _duration = formatDuration(this.props.duration)
 
@@ -145,13 +195,20 @@ class Player extends Component {
     return (
       <div className="player">
         <div className="player-control">
-          <span className="iconfont icon-skipprevious"></span>
-          <span ref="play" className={"iconfont " + (isPlaying ? "icon-pause" : "icon-play")} onClick={this.handlePlayClick} ></span>
-          <span className="iconfont icon-skipnext" onClick={this.handleNextClick}></span>
+          <span className="iconfont icon-skipprevious" onClick={this.props.playingTrack.id ? this.handlePrevClick : () => {}}></span>
+          <span ref="play" className={"iconfont " + (isPlaying ? "icon-pause" : "icon-play")} onClick={ this.props.playingTrack.id ? this.handlePlayClick : () => {}} ></span>
+          <span className="iconfont icon-skipnext" onClick={this.props.playingTrack.id ? this.handleNextClick : () => {}}></span>
         </div>
 
         <div className="time-bar-slider">
-          <Slider class="time" step={0.1} min={0} max={100} defaultValue={0} value={curTimePercentage} handle={handle} onChange={this.onTimeSliderChange} tipFormatter={null} />
+          {
+            this.state.loading ? 
+            <div className="loading">
+              <Slider step={0.1} min={0} max={100} defaultValue={0} value={curTimePercentage} handle={handle} onChange={this.onTimeSliderChange} tipFormatter={null} />
+            </div> :
+            <Slider step={0.1} min={0} max={100} defaultValue={0} value={curTimePercentage} handle={handle} onChange={this.onTimeSliderChange} tipFormatter={null} /> 
+          }
+
         </div>
 
         <div className="time-bar">

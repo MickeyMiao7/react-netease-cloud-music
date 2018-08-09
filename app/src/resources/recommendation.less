@@ -1,0 +1,80 @@
+.recommendation {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+ 
+  .hot-playlists {
+    padding: 30px;
+
+    h2 {
+      margin-bottom: 0;
+      color: #666;
+      font-size: 20px;
+      height: 28px;
+      border-bottom: 1px solid @theme-separator-color;
+
+      span {
+        border-bottom: 4px solid @theme-separator-color;
+      }
+    }
+
+    .playlists-container {
+      flex: 0 0 auto;
+
+      display: flex;
+      flex-wrap: wrap;
+
+      .hot-playlist {
+        position: relative;
+        flex: 0 0 150px;
+        height: auto;
+
+        margin-right: 50px;
+        margin-top: 40px;
+
+        > a.img-a {
+          position: absolute;
+          left: 0;
+          width: 150px;
+          height: 150px;
+        }
+
+        img {
+          box-sizing: border-box;
+          width: 150px;
+          height: 150px;
+          border: 1px solid #999999;
+        }
+
+        .description {
+          text-indent: 2px;
+          color: #888888;
+        }
+
+        span.iconfont {
+          padding-top: 2px;
+          padding-right: 4px;
+        }
+
+        span.play-count {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 75px;
+
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          font-size: 12px;
+          color: #ffffff;
+          background: #666666; /* For browsers that do not support gradients */
+          background: linear-gradient(to right, transparent , #666666);
+
+        }
+      }
+    }
+    
+  }
+}
