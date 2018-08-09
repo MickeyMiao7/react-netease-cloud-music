@@ -27,6 +27,7 @@ module.exports = {
         historyApiFallback: true, // 不跳转
         inline: true,
         hot: true,
+        disableHostCheck: true,
         proxy: {
             '/3rdpartyAPI/*': {
                 'target': 'http://localhost:3000',
