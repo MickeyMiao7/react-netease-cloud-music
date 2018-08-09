@@ -36,7 +36,10 @@ $ npm run build
 
 ## Caputure
 
-1. ![Playlist](https://github.com/MickeyMiao7/react-netease-cloud-music/blob/master/screenshots/playlist.png)    
-2. ![Recommendation](https://github.com/MickeyMiao7/react-netease-cloud-music/blob/master/screenshots/recommendation.png)
-3. ![Album](https://github.com/MickeyMiao7/react-netease-cloud-music/blob/master/screenshots/album.png)
-4. ![Playlist](https://github.com/MickeyMiao7/react-netease-cloud-music/blob/master/screenshots/artist.png)
+![Playlist](https://github.com/MickeyMiao7/react-netease-cloud-music/blob/master/screenshots/playlist.png)    
+
+![Recommendation](https://github.com/MickeyMiao7/react-netease-cloud-music/blob/master/screenshots/recommendation.png)
+
+![Album](https://github.com/MickeyMiao7/react-netease-cloud-music/blob/master/screenshots/album.png)
+
+![Playlist](https://github.com/MickeyMiao7/react-netease-cloud-music/blob/master/screenshots/artist.png)
