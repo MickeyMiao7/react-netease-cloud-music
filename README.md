@@ -1,12 +1,12 @@
-#React-Netease-Cloud-Music   
+# React-Netease-Cloud-Music   
 
-##Descption   
+## Descption   
 
 This project is set learning React. 
 
 You can see the [demo](http://mickeymiao.cn/) here, in which the data is set up based on my own account. 
 
-##Dependency   
+## Dependency   
 
 - React
 - React Router
@@ -19,7 +19,7 @@ You can see the [demo](http://mickeymiao.cn/) here, in which the data is set up 
 - ES6
 - React Dev Server
 
-##API   
+## API   
 
 The API is using [网易云音乐 Node.js API service](https://github.com/Binaryify/NeteaseCloudMusicApi). The server will be running locally as proxy for Cross-Origin requests
 
